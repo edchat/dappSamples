@@ -1,0 +1,55 @@
+{
+	"id": "simple2App3",
+	"name": "simple2App3",
+	"loaderConfig": {
+		"paths": {
+			"simple2App3": "../simple2"
+		}
+	},
+	"modules": [
+	],
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/Logger"
+	],
+
+	"dependencies": [
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack"
+	],
+
+	"parseOnLoad": true,
+
+
+	"appLogging": {
+		"logAll": 0
+	},
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	"defaultView": "simple2App3Home1",
+	"views": {
+		"simple2App3Home1": {
+			"constraint": "main",
+			"parentSelector": "#simple2App3dviewStack",
+		// TODO, I could not use the loaderConfig path for simple2App3 here, not sure why it did not find the template
+		//	"template": "simple2App3/viewTemplate3.html"
+			"controller": "simple2App3/viewController1.js",
+			"template": "simple2App3/viewTemplate3.html"
+		},
+		"simple2App3Home3NoController": {
+			"constraint": "main",
+			"parentSelector": "#simple2App3dviewStack",
+			"controller": "simple2App3/viewController1.js",
+			"template": "simple2App3/viewTemplate3.html"
+		},
+		"simple2App3Home2": {
+			"constraint": "main",
+			"parentSelector": "#simple2App3dviewStack",
+			"controller": "simple2App3/viewController1.js",
+			"template": "simple2App3/viewTemplate3.html"
+		}
+
+	}
+}
