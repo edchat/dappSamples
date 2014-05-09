@@ -6,7 +6,7 @@ define(["dojo/dom", "dojo/on"], function (dom, on) {
 			on(this.domNode.ownerDocument.getElementById("detaillabel2"), "click",
 				function () {
 					console.log("in on click");
-					deliteApp.showOrHideView("content,home");
+					deliteApp.showOrHideViews("content,home");
 				}
 			);
 		},

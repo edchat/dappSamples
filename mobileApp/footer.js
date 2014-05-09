@@ -26,8 +26,8 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 			on(this.domNode.ownerDocument.getElementById("label1"), "click",
 				function () {
 					console.log("in on click");
-					//	deliteApp.showOrHideView('detail2');
-					deliteApp.showOrHideView("content,detail");
+					//	deliteApp.showOrHideViews('detail2');
+					deliteApp.showOrHideViews("content,detail");
 				}
 			);
 		},

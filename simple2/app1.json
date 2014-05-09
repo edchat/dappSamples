@@ -20,10 +20,12 @@
 		"deliteful/ViewStack"
 	],
 
+	"parseOnLoad": true,
+
 	"containerSelector" : "#nested1App1dviewStack",
 
 	"appLogging": {
-		"logAll": 0
+		"logAll": 1
 	},
 
 	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!

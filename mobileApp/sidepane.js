@@ -25,12 +25,12 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 			// I put the on click back in the home.html
 			on(this.domNode.ownerDocument.getElementById("spbbb"), "click",
 				function () {
-					mobileApp.showOrHideView("bbb");
+					mobileApp.showOrHideViews("bbb");
 				}
 			);
 			on(this.domNode.ownerDocument.getElementById("spddd"), "click",
 				function () {
-					mobileApp.showOrHideView("ddd");
+					mobileApp.showOrHideViews("ddd");
 				}
 			);
 		},

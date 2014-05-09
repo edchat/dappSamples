@@ -31,11 +31,11 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 				//on(document.getElementById("label1"), "click",
 				function () {
 					console.log("in on click");
-					//	deliteApp.showOrHideView('detail2');
+					//	deliteApp.showOrHideViews('detail2');
 					var params = {
 						viewData: "foo"
 					};
-					deliteApp.showOrHideView('header+content,detail', params);
+					deliteApp.showOrHideViews('header+content,detail', params);
 				}
 			);
 
@@ -51,11 +51,11 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 				on(this.domNode.ownerDocument.getElementById("label1"), "click",
 					//on(document.getElementById("label1"), "click",
 					function () {
-						//	deliteApp.showOrHideView('detail2');
+						//	deliteApp.showOrHideViews('detail2');
 						var params = {
 							viewData: "foo"
 						};
-						deliteApp.showOrHideView('header+content,detail', params);
+						deliteApp.showOrHideViews('header+content,detail', params);
 					}
 				);
 				*/
