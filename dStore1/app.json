@@ -1,0 +1,93 @@
+{
+	"id": "dstore1App",
+	"name": "dstore1App",
+	"loaderConfig": {
+		"paths": {
+			"has" : {
+				"requirejs" : {
+					"dstore1App": "../dstore1"
+				},
+				"!requirejs" : {
+					"dstore1App": "../dappSamples/dstore1"
+				}
+			}
+		}
+	},
+	"modules": [
+	],
+
+	"initController": "dapp/controllers/delite/Init",
+
+	"controllers": [
+		"dapp/controllers/LogAllDappEvents",
+		"dapp/controllers/Logger",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition"
+	],
+
+	"dependencies": [
+		"deliteful/list/List",
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack",
+		"deliteful/ScrollableContainer",
+		"dstore/Memory",
+		"dstore/Observable"
+	],
+
+	"stores": {
+       "list1Store":{
+           "type": "dstore/Memory",
+	      // "observable": true,
+           "params": {
+                "data": "dstore1App.list1Data"
+           }
+  		}
+	},
+
+	"parseOnLoad": true,
+
+
+	"appLogging": {
+		"logAll": 1,
+		"logTimeStamp": 0,
+		"loggingList": [
+			"app-view:"
+			,"testApp:"
+		//	,"Main:"
+		//	,"ViewBase:"
+		//	,"View:"
+		//	,"controllers/delite/Load:"
+		//	,"controllers/delite/Layout:"
+		//	,"controllers/delite/Transition:"
+		]
+	},
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	"defaultView": "dstore1AppHome1",
+	"views": {
+		"dstore1AppHome1": {
+			"constraint": "main",
+			"parentSelector": "#dstore1AppdviewStack",
+		// TODO, I could not use the loaderConfig path for dstore1App here, not sure why it did not find the template
+		//	"template": "dstore1App/viewTemplate.html"
+			"controller": "dstore1App/viewController.js",
+			"template": "dstore1App/viewTemplate.html"
+		},
+		"dstore1AppHome2": {
+			"constraint": "main",
+			"parentSelector": "#dstore1AppdviewStack",
+			"stores": {
+				"list2Store":{
+					"type": "dstore/Memory",
+					// "observable": true,
+					"params": {
+					"data": "dstore1App.list2Data"
+					}
+		  		}
+			},
+			"controller": "dstore1App/viewController2.js",
+			"template": "dstore1App/viewTemplate2.html"
+		}
+
+	}
+}

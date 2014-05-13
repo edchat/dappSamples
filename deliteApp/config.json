@@ -5,10 +5,10 @@
 		"paths": {
 			"has" : {
 				"requirejs" : {
-					"deliteApp": "../deliteApp"
+					"deliteAppPath": "../deliteApp"
 				},
 				"!requirejs" : {
-					"deliteApp": "../dappSamples/deliteApp"
+					"deliteAppPath": "../dappSamples/deliteApp"
 				}
 			}
 		}
@@ -27,9 +27,10 @@
 		"deliteful/ViewStack"
 	],
 
+	"initController": "dapp/controllers/delite/Init",
+
 	"controllers": [
 		"dapp/controllers/Logger",
-		"dapp/controllers/delite/Init",
 		"dapp/controllers/delite/Load",
 		"dapp/controllers/delite/Transition"
 	],
@@ -42,18 +43,18 @@
 
 	"views": {
 		"main": {
-			"template": "deliteApp/main.html"
+			"template": "deliteAppPath/main.html"
 		},
 		"header": {
 			"constraint": "header",
 		//	"parentSelector": "#main",
-			"template": "deliteApp/header.html"
+			"template": "deliteAppPath/header.html"
 		},
 		"detail2": {
 			"constraint": "main",
 			"parentSelector": "#content-view-stack",
-			"controller" : "deliteApp/detail.js",
-			"template": "deliteApp/detail.html"
+			"controller" : "deliteAppPath/detail.js",
+			"template": "deliteAppPath/detail.html"
 		},
 		"content": {
 			"dependencies": [
@@ -61,47 +62,47 @@
 			],
 			"constraint": "main",
 		//	"parentSelector": "#main",
-			"template": "deliteApp/content.html",
-			"controller": "deliteApp/content.js",
+			"template": "deliteAppPath/content.html",
+			"controller": "deliteAppPath/content.js",
 			"defaultView": "home",
 			"views": {
 				"home": {
 					"constraint": "content-view-stack",
 					"parentSelector": "#content-view-stack",
-					"nls": "deliteApp/nls/home",
-					"controller" : "deliteApp/home.js",
-					"template": "deliteApp/home.html"
+					"nls": "deliteAppPath/nls/home",
+					"controller" : "deliteAppPath/home.js",
+					"template": "deliteAppPath/home.html"
 				},
 				"detail": {
 					"constraint": "content-view-stack",
 					"parentSelector": "#content-view-stack",
-					"controller" : "deliteApp/detail.js",
-					"template": "deliteApp/detail.html"
+					"controller" : "deliteAppPath/detail.js",
+					"template": "deliteAppPath/detail.html"
 				}
 			}
 		}//,
 	//	"home": {
 	//		"constraint": "content-view-stack",
 	//		"parentSelector": "#content-view-stack",
-	//		"nls": "deliteApp/nls/home",
-	//		"controller" : "deliteApp/home.js",
-	//		"template": "deliteApp/home.html"
+	//		"nls": "deliteAppPath/nls/home",
+	//		"controller" : "deliteAppPath/home.js",
+	//		"template": "deliteAppPath/home.html"
 	//	},
 	//	"p1": {
-	//		"controller" : "deliteApp/home.js",
-	//		"template": "deliteApp/home.html",
+	//		"controller" : "deliteAppPath/home.js",
+	//		"template": "deliteAppPath/home.html",
 	//		"views": {
 	//			"s1": {
 	//				"constraint": "s1constraint",
 	//				"parentSelector": "#s1constraint",
-	//				"controller" : "deliteApp/home.js",
-	//				"template": "deliteApp/home.html",
+	//				"controller" : "deliteAppPath/home.js",
+	//				"template": "deliteAppPath/home.html",
 	//				"views": {
 	//					"child1": {
 	//						"constraint": "child1constraint",
 	//						"parentSelector": "#child1constraint",
-	//						"controller" : "deliteApp/home.js",
-	//						"template": "deliteApp/home.html"
+	//						"controller" : "deliteAppPath/home.js",
+	//						"template": "deliteAppPath/home.html"
 	//					}
 	//				}
 	//			}
