@@ -1,5 +1,5 @@
 // jshint unused:false, undef:false, quotmark:false
-require(["dojo/_base/window", "dapp/main", "dojo/json", "requirejs-text/text!./app.json", "dojo/sniff"],
+require(["dojo/_base/window", "dapp/Application", "dojo/json", "requirejs-text/text!./app.json", "dojo/sniff"],
 	function (win, Application, json, config, has) {
 		win.global.dstore1App = {};
 		win.global.dstore1App.list1Data = {

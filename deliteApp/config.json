@@ -27,9 +27,8 @@
 		"deliteful/ViewStack"
 	],
 
-	"initController": "dapp/controllers/delite/Init",
-
 	"controllers": [
+		"dapp/controllers/delite/Init",
 		"dapp/controllers/Logger",
 		"dapp/controllers/delite/Load",
 		"dapp/controllers/delite/Transition"

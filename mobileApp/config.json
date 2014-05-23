@@ -30,9 +30,8 @@
 		"deliteful/Button"
 	],
 
-	"initController": "dapp/controllers/delite/Init",
-
 	"controllers": [
+		"dapp/controllers/delite/Init",
 		"dapp/controllers/Logger",
 		"dapp/controllers/delite/Load",
 		"dapp/controllers/delite/Transition"
@@ -81,12 +80,6 @@
 			"parentSelector": "#vs",
 			"controller" : "mobileApp/ddd.js",
 			"template": "mobileApp/ddd.html"
-		},
-		"main": {
-			"constraint": "mainContainer",
-			"parentSelector": "#mainContainer",
-			"controller" : "mobileApp/main.js",
-			"template": "mobileApp/main.html"
 		},
 		"header": {
 			"constraint": "main",

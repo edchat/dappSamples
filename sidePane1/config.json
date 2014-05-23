@@ -1,0 +1,133 @@
+{
+	"id": "sidePane1App1",
+	"name": "sidePane1App1",
+	"loaderConfig": {
+		"paths": {
+			"sidePane1App1": "../sidePane1"
+		}
+	},
+//	"loaderConfig": {
+//		"paths": {
+//			"has" : {
+//				"requirejs" : {
+//					"sidePane1App1": "../sidePane1"
+//				},
+//				"!requirejs" : {
+//					"sidePane1App1": "../dappSamples/sidePane1"
+//				}
+//			}
+//		}
+//	},
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/Logger",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition"
+	],
+
+	"dependencies": [
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack",
+		"deliteful/SidePane"
+	],
+
+	"containerSelector" : "#nested1App1dviewStack",
+
+	"appLogging": {
+		"logAll": 1,
+		"logTimeStamp": 0
+	},
+
+	"parseOnLoad": true,
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	//"defaultView": "P1,S1,V1",
+	"defaultView": "header1+centerParent+center1+right1+footer1",
+//	"defaultView": "centerParent+header1+right1+footer1",
+//	"defaultView": "header1",
+//	"loadViewsInOrder": true,
+
+	"views": {
+		"header1": {
+			"constraint": "header",
+			"parentSelector": "#headerViewStack",
+			"controller": "sidePane1App1/headerController1.js",
+			"template": "sidePane1App1/headerTemplate1.html"
+		},
+		"header2": {
+			"constraint": "header",
+			"parentSelector": "#headerViewStack",
+			"controller": "sidePane1App1/headerController1.js",
+			"template": "sidePane1App1/headerTemplate2.html"
+		},
+		"leftParent": {
+			"constraint": "centerParent",
+			"loadViewsInOrder": true,
+			"parentSelector": "#leftPane",
+			"controller": "sidePane1App1/parentController1.js",
+			"template": "sidePane1App1/leftSubParentTemplate.html",
+			"defaultView": "left1",
+			"views": {
+				"left1": {
+					"constraint": "left",
+					"parentSelector": "#leftViewStack",
+					"controller": "sidePane1App1/leftController1.js",
+					"template": "sidePane1App1/leftTemplate1.html"
+				},
+				"left2": {
+					"constraint": "left",
+					"parentSelector": "#leftViewStack",
+					"controller": "sidePane1App1/leftController1.js",
+					"template": "sidePane1App1/leftTemplate1.html"
+				}
+			}
+		},
+		"centerParent": {
+			"constraint": "centerParent",
+			"loadViewsInOrder": true,
+			"parentSelector": "#centerLinearLayout",
+			"controller": "sidePane1App1/parentController1.js",
+			"template": "sidePane1App1/subParentTemplate.html"
+		},
+		"center1": {
+			"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"loadViewsInOrder": true,
+			"controller": "sidePane1App1/centerController1.js",
+			"template": "sidePane1App1/centerTemplate1.html"
+		},
+		"center2": {
+			"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"controller": "sidePane1App1/centerController1.js",
+			"template": "sidePane1App1/centerTemplate1.html"
+		},
+		"right1": {
+			"constraint": "right",
+			"parentSelector": "#rightPane",
+			"controller": "sidePane1App1/rightController1.js",
+			"template": "sidePane1App1/rightTemplate1.html"
+		},
+		"right2": {
+			"constraint": "right",
+			"parentSelector": "#rightPane",
+			"controller": "sidePane1App1/rightController1.js",
+			"template": "sidePane1App1/rightTemplate1.html"
+		},
+		"footer1": {
+			"constraint": "footer",
+			"parentSelector": "#footerViewStack",
+			"controller": "sidePane1App1/footerController1.js",
+			"template": "sidePane1App1/footerTemplate1.html"
+		},
+		"footer2": {
+			"constraint": "footer",
+			"parentSelector": "#footerViewStack",
+			"controller": "sidePane1App1/footerController1.js",
+			"template": "sidePane1App1/footerTemplate2.html"
+		}
+	}
+}

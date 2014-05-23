@@ -1,5 +1,5 @@
 // jshint unused:false, undef:false, quotmark:false
-require(["dapp/main", //"dojo/json",
+require(["dapp/Application", //"dojo/json",
 		"requirejs-text/text!./config.json",
 		/*"requirejs-text/text!./dapp/samples/mobileApp/config.json",*/
 		"dojo/sniff"
