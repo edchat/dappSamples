@@ -20,7 +20,8 @@
 		"dapp/controllers/delite/Init",
 		"dapp/controllers/Logger",
 		"dapp/controllers/delite/Load",
-		"dapp/controllers/delite/Transition"
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/History"
 	],
 
 	"dependencies": [
@@ -46,18 +47,7 @@
 
 
 	"appLogging": {
-		"logAll": 1,
-		"logTimeStamp": 0,
-		"loggingList": [
-			"app-view:"
-			,"testApp:"
-		//	,"Main:"
-		//	,"ViewBase:"
-		//	,"View:"
-		//	,"controllers/delite/Load:"
-		//	,"controllers/delite/Layout:"
-		//	,"controllers/delite/Transition:"
-		]
+		"logAll": 1
 	},
 
 	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!

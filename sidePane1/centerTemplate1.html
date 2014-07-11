@@ -1,23 +1,26 @@
 <template class="fill view mblView" style="width: 100%; height: 100%;">Test View {{name}}
-	<div>Test View {{name}}  Center
+	<div>Test View {{name}}  Center data: {{data}}
 		<ul>
-			<li onclick="sidePane1App1.showOrHideViews('leftParent,left1')">DisplayView Show left1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('-leftParent-leftParent,left1')">DisplayView Hide left1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('leftParent,left2')">DisplayView Show left2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('-leftParent-leftParent,left2')">DisplayView Hide left2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('header2+center2+footer2')">DisplayView header2+center2+footer2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('header1+center2+footer1')">DisplayView header1+center2+footer1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('header2+center1+footer2')">DisplayView header2+center1+footer2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('header1+center1+footer1')">DisplayView header1+center1+footer1 slide >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('footer1')">DisplayView footer1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('footer2')">DisplayView footer2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('right1')">DisplayView Show right1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('-right1')">DisplayView Hide right1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('right2')">DisplayView Show right2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('-right2')">DisplayView Hide right2 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('right1-centerParent')">DisplayView Hide centerParent show right1 >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('-center1-centerParent')">DisplayView Hide center1 & centerParent >>>>></li>
-			<li onclick="sidePane1App1.showOrHideViews('-center1+right1')">DisplayView Hide center1 show right1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center2',{transition:'slide'})">DisplayView Show center2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center1',{viewData:'data1'})">DisplayView Show center1 data1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center1',{viewData:'data2'})">DisplayView Show center1 data2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center2',{viewData:'data1'})">DisplayView Show center2 data1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center2',{viewData:'data2'})">DisplayView Show center2 data2 >>>>></li>
+			<!-- need a space between the brackets below } } because two together are for handlebars -->
+			<li on-click="sidePane1App1.showOrHideViews('center1',{viewData:{subData: 'subData1'} })">DisplayView Show center1 subdata1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center1',{viewData:{subData: 'data2'} })">DisplayView Show center1 subdata2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center2',{viewData:{subData:'data1'} })">DisplayView Show center2 data1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('center2',{viewData:{subData:'data2'} })">DisplayView Show center2 data2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('leftParent+leftParent,left1',{transition:'slide'})">DisplayView Show left1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('-leftParent-leftParent,left1',{transition:'none'})">DisplayView Hide left1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('leftParent,left2',{transition:'slide'})">DisplayView Show left2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('-leftParent-leftParent,left2')">DisplayView Hide left2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('right1')">DisplayView Show right1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('-right1')">DisplayView Hide right1 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('right2')">DisplayView Show right2 >>>>></li>
+			<li on-click="sidePane1App1.showOrHideViews('-right2')">DisplayView Hide right2 >>>>></li>
+			<li on-click="rightPane.show('right2')">rightPane.show right2 >>>>></li>
+			<li on-click="rightPane.hide('right2')">rightPane.hide right2 >>>>></li>
 		</ul>
 	</div>
 </template>

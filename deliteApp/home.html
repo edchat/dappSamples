@@ -1,25 +1,26 @@
-<template>
+<template requires="deliteful/Button">
     <ul>
-		<li id="label1">{{nls.label1}} - programatic onclick >>>>>
+		<li id="label1">{{nls.label1}} - programatic on-click >>>>>
 			<button is="d-button">buttonTest</button>
 		</li>
-		<li id="label2"> .show - programatic onclick >>>>>
+		<li id="label2"> .show - programatic on-click >>>>>
 			<button is="d-button">buttonTest</button>
 		</li>
-		<li onclick="deliteApp.showOrHideViews('header+detail2',{viewData:'foo'})">{{nls.label2}} onclick setup in html >>>>>
-			<button is="d-button" onclick="console.log('clicked icon button');">buttonTest2</button>
+		<li on-click="deliteApp.showOrHideViews('header+detail2',{viewData:'foo'})">{{nls.label2}} on-click setup in html >>>>>
+			<button is="d-button" on-click="console.log('clicked icon button');">buttonTest2</button>
 		</li>
-		<li onclick="deliteApp.showOrHideViews('header+detail2',{viewData:'foo'})">{{nls.label2}} onclick detail2 in html >>>>>
-			<button is="d-button" onclick="console.log('clicked icon button');">buttonTest2</button>
+		<li on-click="deliteApp.showOrHideViews('header+detail2',{viewData:'foo'})">{{nls.label2}} on-click detail2 in html >>>>>
+			<button is="d-button" on-click="console.log('clicked icon button');">buttonTest2</button>
 		</li>
-		<li onclick="deliteApp.showOrHideViews('-content,home')">Hide content,home >>>>>
-			<button is="d-button" onclick="console.log('clicked icon button');">buttonTest2</button>
+		<li on-click="deliteApp.showOrHideViews('-content,home')">Hide content,home >>>>>
+			<button is="d-button" on-click="console.log('clicked icon button');">buttonTest2</button>
 		</li>
-		<li onclick="deliteApp.showOrHideViews('-content')">Hide content >>>>>
+		<li on-click="deliteApp.showOrHideViews('-content')">Hide content >>>>>
 		</li>
-	<!--	<li onclick="deliteApp.showOrHideViews('content,detail')">{{nls.label1}} >>>>> </li>
-		<li onclick="deliteApp.showOrHideViews('header+content,detail')">{{nls.label2}} >>>>></li> -->
+	<!--	<li on-click="deliteApp.showOrHideViews('content,detail')">{{nls.label1}} >>>>> </li>
+		<li on-click="deliteApp.showOrHideViews('header+content,detail')">{{nls.label2}} >>>>></li> -->
     </ul>
+	<div><button is="d-button" on-click="console.log('clicked icon button');"> buttonTest2AA </button></div>
 	<div>home currentStatus is {{currentStatus}}</div>
 	<div>home beforeActivate   calls: {{beforeActivateStatus}}</div>
 	<div>home beforeDeactivate calls: {{beforeDeactivateStatus}}</div>

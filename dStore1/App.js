@@ -25,7 +25,8 @@ require(["dojo/_base/window", "dapp/Application", "dojo/json", "requirejs-text/t
 		jsonData = jsonData.replace(/\/\*.*?\*\//g, "");
 		jsonData = jsonData.replace(/\/\/.*/g, "");
 		//new Application(JSON.parse(jsonData));
-		var appDeferred = new Application(JSON.parse(jsonData));
+		var ttt = JSON.parse(jsonData);
+		var appDeferred = new Application(ttt);
 		appDeferred.then(function (app) {
 			console.log("deferred resolved for new App [" + app.id + "] it should be started and default views shown");
 		});

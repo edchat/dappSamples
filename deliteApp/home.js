@@ -1,24 +1,17 @@
 // jshint unused:false, undef:false, quotmark:false
 define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) {
 	return {
-		attributes: {
-			testStringReplace: "xAZZZZed",
-			"beforeActivateStatus": "none",
-			"beforeDeactivateStatus": "none",
-			"afterActivateStatus": "none",
-			"afterDeactivateStatus": "none",
-			"currentStatus": "test"
-		},
+		testStringReplace: "xAZZZZed",
+		"beforeActivateStatus": "none",
+		"beforeDeactivateStatus": "none",
+		"afterActivateStatus": "none",
+		"afterDeactivateStatus": "none",
 		currentStatus: "testxxx",
-		beforeActivateCallCount: 0,
-		beforeDeactivateCallCount: 0,
-		afterActivateCallCount: 0,
-		afterDeactivateCallCount: 0,
+		_beforeActivateCallCount: 0,
+		_beforeDeactivateCallCount: 0,
+		_afterActivateCallCount: 0,
+		_afterDeactivateCallCount: 0,
 		f: "app-view:",
-		constructor: function (params) { // jshint unused:false
-			//TODO: why is this not being hit?
-			this.app.log(this.f, " in [" + this.viewName + "] constructor called for [" + this.id + "]");
-		},
 		init: function () {
 			this.app.log(this.f, " in [" + this.viewName + "] init called for [" + this.id + "]");
 			console.log("in home.js init called");
@@ -43,8 +36,8 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		beforeActivate: function (previousView, viewData) {
 			console.log("beforeActivate called for [" + this.viewName + "] with previousView.id =[" + (previousView ?
 				previousView.id : "") + "] with viewData=", viewData);
-			this.beforeActivateCallCount++;
-			this.domNode.beforeActivateStatus = "called " + this.beforeActivateCallCount + " times";
+			this._beforeActivateCallCount++;
+			this.domNode.beforeActivateStatus = "called " + this._beforeActivateCallCount + " times";
 			if (!this.setuponclick) {
 				this.setuponclick = true;
 				/*
@@ -72,20 +65,20 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		beforeDeactivate: function (nextView, viewData) {
 			console.log("beforeDeactivate called for [" + this.viewName + "] with previousView.id =[" + (nextView ?
 				nextView.id : "") + "]");
-			this.beforeDeactivateCallCount++;
-			this.domNode.beforeDeactivateStatus = "called " + this.beforeDeactivateCallCount + " times";
+			this._beforeDeactivateCallCount++;
+			this.domNode.beforeDeactivateStatus = "called " + this._beforeDeactivateCallCount + " times";
 		},
 		afterActivate: function (previousView, viewData) {
 			console.log("afterActivate called for [" + this.viewName + "] with previousView.id =[" + (previousView ?
 				previousView.id : "") + "] with viewData=", viewData);
-			this.afterActivateCallCount++;
-			this.domNode.afterActivateStatus = "called " + this.afterActivateCallCount + " times";
+			this._afterActivateCallCount++;
+			this.domNode.afterActivateStatus = "called " + this._afterActivateCallCount + " times";
 		},
 		afterDeactivate: function (nextView, viewData) {
 			console.log("afterDeactivate called for [" + this.viewName + "] with previousView.id =[" + (nextView ?
 				nextView.id : "") + "]");
-			this.afterDeactivateCallCount++;
-			this.domNode.afterDeactivateStatus = "called " + this.afterDeactivateCallCount + " times";
+			this._afterDeactivateCallCount++;
+			this.domNode.afterDeactivateStatus = "called " + this._afterDeactivateCallCount + " times";
 		}
 	};
 });

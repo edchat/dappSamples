@@ -1,0 +1,41 @@
+<template class="fill view mblView" style="width: 100%; height: 100%;">Test View {{name}}
+	<div>Test View {{name}}  Center
+		<div>viewData for {{name}} is [{{myViewData}}]</div>
+		<div>params for {{name}} is p [{{myParamsP}}]</div>
+		<div>params for {{name}} is vp [{{myParamsVp}}]</div>
+		<ul>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewParams:{views:{center2: {'p':{x:'One'} } } } })">DisplayView center2 vparams:One >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center1',{viewParams:{views:{center1: {'p':'Two'} } } })">DisplayView center1 vparams:Two >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center1',{viewParams:{views:{center1: {'p':'3shouldBeSet'}, center2: {'p':'3shouldNOTBeSet'} } } })">DisplayView center1 view params:3shouldBeSet >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewData:{vd1:'Four'} })">DisplayView center2 viewData:Four >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewData:{views:{center2: {'vd1':'Five'} } } })">DisplayView center2 viewData:Five >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewParams:{views:{center2: {'p':'Six'} } } })">DisplayView center2 vparams:Six >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewParams:{'p':'Seven' } })">DisplayView center2 params:Seven >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewParams:{views:{center2: {'vp':'EightA'} } }, 'p':'EightB'} )">
+				DisplayView center2 vparams:EightA and params:EightB >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewParams:{views:{center2: {'vp':'NineA'} }, 'p':'NineB'}, viewData:{vd1:'NineC'} })">
+				DisplayView center2 vparams:NineA and params:NineB and viewData NineC>>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewParams:{views:{center2: {'vp':'TenA'} }, 'p':'TenB'} })">
+				DisplayView center2 vparams:TenA and params:TenA and no viewData>>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('centerParent2,child1',{viewParams:{views:{'centerParent2': {'vp':'ShowFromParent'} },'p':'Eleven' } })">
+				DisplayView centerParent2,child1 vp:ShowFromParent p:Eleven>>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('centerParent2,child1',{viewParams:{views:{'centerParent2,child1': {'vp':'ShowFromChild'}, 'centerParent2': {'vp2':'NoShowFromParent'} },'p':'Twelve' } })">
+				DisplayView centerParent2,child1 vp:ShowFromChild p:Twelve>>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('centerParent2,child1',{viewParams:{views:{'centerParent2': {'vp2':'NoShowFromParent'}, 'centerParent2,child1': {'vp':'ShowFromChild'} },'p':'TwelveB' } })">
+				DisplayView centerParent2,child1 vp:ShowFromChild p:TwelveB>>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('centerParent2,child1',{viewData:{views:{'centerParent2': {'vd1':'NoShowFromParent'}, 'centerParent2,child1': {'vd1':'ShowFromChild'} },'p':'Thirteen' } })">
+				DisplayView centerParent2,child1 viewData vp:ShowFromChild p:Thirteen>>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('center2',{viewData:{views:{center2: {'vd1':'Fourteen'} } } })">DisplayView center2 viewData:Fourteen >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('header1+center2+footer1')">DisplayView header1+center2+footer1 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('header2+center1+footer2')">DisplayView header2+center1+footer2 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('header1+center1+footer1')">DisplayView header1+center1+footer1 slide >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('footer1')">DisplayView footer1 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('footer2')">DisplayView footer2 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('-right1')">DisplayView Hide right1 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('right1')">DisplayView Show right1 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('right1-centerParent')">DisplayView Hide centerParent show right1 >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('-center1-centerParent')">DisplayView Hide center1 & centerParent >>>>></li>
+			<li on-click="viewDataAndParamsApp1.showOrHideViews('-center1+right1')">DisplayView Hide center1 show right1 >>>>></li>
+		</ul>
+	</div>
+</template>

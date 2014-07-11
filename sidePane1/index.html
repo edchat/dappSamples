@@ -27,7 +27,9 @@
 						"delite": "../../delite",
 						"deliteful": "../../deliteful",
 						"requirejs": "../../requirejs",
-						"requirejs-text": "../../requirejs-text"
+						"requirejs-text": "../../requirejs-text",
+						"requirejs-dplugins": "../../requirejs-dplugins",
+						"requirejs-domready": "../../requirejs-domready"
 				    },
 				    waitSeconds: 15
 				  });
@@ -40,25 +42,13 @@
 	<body style="width:100%; height: 100%">
 	<div style="position: relative; height: 100%">
 		<!--(note initial size was not be set right, had to set ; height: 100% above) -->
-		<d-side-pane mode="push" position="start" id="leftPane" style="background-color: lavender;">
-		<!--	<d-linear-layout class="height100">
-			</d-linear-layout>
-		-->
-		</d-side-pane>
+		<d-side-pane mode="push" position="start" id="leftPane" style="background-color: lavender;"></d-side-pane>
 		<d-linear-layout style="width:100%; height: 100%">
-			<d-view-stack id="headerViewStack" style="width: 100%; height: 10%;">
-			</d-view-stack>
-			<d-linear-layout id="centerLinearLayout" style="width:100%; height: 100%" vertical='false'>
-				<!--	<d-view-stack id="centerViewStack" class="fill" style="width: 90%; background-color: green">
-				</d-view-stack>
-				<d-view-stack id="rightViewStack" style="width: 10%; background-color: yellow">
-				</d-view-stack> -->
-			</d-linear-layout>
-			<d-view-stack id="footerViewStack" style="width: 100%; height: 10%;">
-			</d-view-stack>
+			<d-view-stack id="headerViewStack" style="width: 100%; height: 10%;"></d-view-stack>
+			<d-linear-layout id="centerLinearLayout" style="width:100%; height: 100%" vertical='false'></d-linear-layout>
+			<d-view-stack id="footerViewStack" style="width: 100%; height: 10%;"></d-view-stack>
 		</d-linear-layout>
-		<d-side-pane mode="push" position="end" id="rightPane"  style="background-color: lightgoldenrodyellow;">
-		</d-side-pane>
+		<d-side-pane position="end" id="rightPane"  style="background-color: lightgoldenrodyellow;"></d-side-pane>
 	</div>
 	</body>
 </html>

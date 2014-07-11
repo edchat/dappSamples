@@ -1,0 +1,125 @@
+{
+	"id": "viewDataAndParamsApp1",
+	"name": "viewDataAndParamsApp1",
+	"loaderConfig": {
+		"paths": {
+			"viewDataAndParamsApp1": "../viewDataAndParams"
+		}
+	},
+//	"loaderConfig": {
+//		"paths": {
+//			"has" : {
+//				"requirejs" : {
+//					"viewDataAndParamsApp1": "../viewDataAndParams"
+//				},
+//				"!requirejs" : {
+//					"viewDataAndParamsApp1": "../dappSamples/viewDataAndParams"
+//				}
+//			}
+//		}
+//	},
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/Logger",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/History"
+	],
+
+	"dependencies": [
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack"
+	],
+
+	"containerSelector" : "#nested1App1dviewStack",
+
+	"appLogging": {
+		"logAll": 1,
+		"logTimeStamp": 0
+	},
+
+	"parseOnLoad": true,
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	//"defaultView": "P1,S1,V1",
+	"defaultView": "header1+centerParent+center1+right1+footer1",
+//	"defaultView": "centerParent+header1+right1+footer1",
+//	"defaultView": "header1",
+//	"loadViewsInOrder": true,
+
+	"views": {
+		"header1": {
+			"constraint": "header",
+			"parentSelector": "#headerViewStack",
+			"controller": "viewDataAndParamsApp1/headerController1.js",
+			"template": "viewDataAndParamsApp1/headerTemplate1.html"
+		},
+		"header2": {
+			"constraint": "header",
+			"parentSelector": "#headerViewStack",
+			"controller": "viewDataAndParamsApp1/headerController1.js",
+			"template": "viewDataAndParamsApp1/headerTemplate2.html"
+		},
+		"centerParent": {
+			"constraint": "centerParent",
+			"loadViewsInOrder": true,
+			"parentSelector": "#centerLinearLayout",
+			"controller": "viewDataAndParamsApp1/parentController1.js",
+			"template": "viewDataAndParamsApp1/subParentTemplate.html"
+		},
+		"center1": {
+			"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"loadViewsInOrder": true,
+			"controller": "viewDataAndParamsApp1/centerController1.js",
+			"template": "viewDataAndParamsApp1/centerTemplate1.html"
+		},
+		"center2": {
+			"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"controller": "viewDataAndParamsApp1/centerController1.js",
+			"template": "viewDataAndParamsApp1/centerTemplate1.html"
+		},
+		"centerParent2": {
+			"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"controller": "viewDataAndParamsApp1/parentController1.js",
+			"template": "viewDataAndParamsApp1/subParentTemplate.html",
+			"views": {
+				"child1": {
+					"constraint": "center",
+					"parentSelector": "#centerViewStack",
+					"controller": "viewDataAndParamsApp1/centerController1.js",
+					"template": "viewDataAndParamsApp1/centerTemplate1.html"
+				}
+			}
+		},
+		"right1": {
+			"constraint": "right",
+			"parentSelector": "#centerLinearLayout",
+			"controller": "viewDataAndParamsApp1/rightController1.js",
+			"template": "viewDataAndParamsApp1/rightTemplate1.html"
+		},
+		"right2": {
+			"constraint": "right",
+			"parentSelector": "#centerLinearLayout",
+			"controller": "viewDataAndParamsApp1/rightController1.js",
+			"template": "viewDataAndParamsApp1/rightTemplate1.html"
+		},
+		"footer1": {
+			"constraint": "footer",
+			"parentSelector": "#footerViewStack",
+			"controller": "viewDataAndParamsApp1/footerController1.js",
+			"template": "viewDataAndParamsApp1/footerTemplate1.html"
+		},
+		"footer2": {
+			"constraint": "footer",
+			"parentSelector": "#footerViewStack",
+			"controller": "viewDataAndParamsApp1/footerController1.js",
+			"template": "viewDataAndParamsApp1/footerTemplate2.html"
+		}
+	}
+}

@@ -2,19 +2,12 @@
 define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Observable", "dojo/_base/declare"],
 	function (dom, on, register, MemoryStore, Observable, declare) {
 	return {
-		attributes: {
-			name: "",
-			lastSelection: ""
-		},
-		beforeActivateCallCount: 0,
-		beforeDeactivateCallCount: 0,
-		afterActivateCallCount: 0,
-		afterDeactivateCallCount: 0,
-		constructor: function (params) { // jshint unused:false
-			//TODO: why is this not being hit?
-			this.app.log("app-view:", " in [" + this.viewName + "] constructor called for [" + this.id + "]");
-			var tempName = "";
-		},
+		name: "",
+		lastSelection: "",
+		_beforeActivateCallCount: 0,
+		_beforeDeactivateCallCount: 0,
+		_afterActivateCallCount: 0,
+		_afterDeactivateCallCount: 0,
 		init: function () {
 			this.domNode.name = this.id;
 			var list = this.domNode.ownerDocument.getElementById("list1");
@@ -43,23 +36,23 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 		beforeActivate: function (previousView, viewData) {
 			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
-			this.beforeActivateCallCount++;
+			this._beforeActivateCallCount++;
 			this.domNode.lastSelection = viewData || "";
 		},
 		beforeDeactivate: function (nextView, viewData) {
 			this.app.log("app-view:", "beforeDeactivate called for [" + this.viewName + "] with previousView.id =[" +
 				(nextView ? nextView.id : "") + "]");
-			this.beforeDeactivateCallCount++;
+			this._beforeDeactivateCallCount++;
 		},
 		afterActivate: function (previousView, viewData) {
 			this.app.log("app-view:", "afterActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
-			this.afterActivateCallCount++;
+			this._afterActivateCallCount++;
 		},
 		afterDeactivate: function (nextView, viewData) {
 			this.app.log("app-view:", "afterDeactivate called for [" + this.viewName + "] with previousView.id =[" +
 				(nextView ? nextView.id : "") + "]");
-			this.afterDeactivateCallCount++;
+			this._afterDeactivateCallCount++;
 		},
 		destroy: function () {
 			this.app.log("app-view:", " in [" + this.viewName + "] destroy called for [" + this.id + "]");

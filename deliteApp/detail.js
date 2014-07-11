@@ -1,9 +1,7 @@
 // jshint unused:false, undef:false, quotmark:false
 define(["dojo/dom", "dojo/on"], function (dom, on) {
 	return {
-		attributes: {
-			"viewIdPlusLi": this.id + "test"
-		},
+		"viewIdPlusLi": this.id + "test",
 		MODULE: "detail",
 		init: function () {
 			console.log("in detail.js init called");
@@ -11,9 +9,11 @@ define(["dojo/dom", "dojo/on"], function (dom, on) {
 			on(this.domNode.querySelectorAll(".detaillabel2")[0], "click",
 				//	on(document.getElementById(this.viewIdPlusLi), "click",
 				function () {
+				//var vdata = {"subData" : "subData1"}
 					console.log("in on click");
 					deliteApp.showOrHideViews("content,home", {
-						reverse: true
+						reverse: true,
+						viewData: {subData: "subData1"}
 					});
 				}
 			);

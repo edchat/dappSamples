@@ -1,0 +1,81 @@
+{
+	"id": "dstore1ParamsApp",
+	"name": "dstore1ParamsApp",
+	"loaderConfig": {
+		"paths": {
+			"has" : {
+				"requirejs" : {
+					"dstore1ParamsApp": "../dstore1Params"
+				},
+				"!requirejs" : {
+					"dstore1ParamsApp": "../dappSamples/dstore1Params"
+				}
+			}
+		}
+	},
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/Logger",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/History"
+	],
+
+	"dependencies": [
+		"deliteful/list/List",
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack",
+		"deliteful/ScrollableContainer",
+		"dstore/Memory",
+		"dstore/Observable"
+	],
+
+	"stores": {
+       "list1Store":{
+           "type": "dstore/Memory",
+	      // "observable": true,
+           "params": {
+                "data": "dstore1ParamsApp.list1Data"
+           }
+  		}
+	},
+
+	"parseOnLoad": true,
+	"hideUrlHash": false,
+
+	"appLogging": {
+		"logAll": 0
+	},
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	"defaultView": "dstore1AppHome1",
+	"views": {
+		"dstore1AppHome1": {
+			"constraint": "main",
+			"parentSelector": "#dstore1AppdviewStack",
+		// TODO, I could not use the loaderConfig path for dstore1App here, not sure why it did not find the template
+		//	"template": "dstore1App/viewTemplate.html"
+			"controller": "dstore1ParamsApp/viewController.js",
+			"template": "dstore1ParamsApp/viewTemplate.html"
+		},
+		"dstore1AppHome2": {
+			"constraint": "main",
+			"parentSelector": "#dstore1AppdviewStack",
+			"stores": {
+				"list2Store":{
+					"type": "dstore/Memory",
+					// "observable": true,
+					"params": {
+					"data": "dstore1ParamsApp.list2Data"
+					}
+		  		}
+			},
+			"controller": "dstore1ParamsApp/viewController2.js",
+			"template": "dstore1ParamsApp/viewTemplate2.html"
+		}
+
+	}
+}

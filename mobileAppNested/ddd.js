@@ -1,22 +1,16 @@
 // jshint unused:false, undef:false, quotmark:false
 define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) {
 	return {
-		attributes: {
-			testStringReplace: "xAZZZZed",
-			"beforeActivateStatus": "none",
-			"beforeDeactivateStatus": "none",
-			"afterActivateStatus": "none",
-			"afterDeactivateStatus": "none",
-			"currentStatus": "test"
-		},
+		testStringReplace: "xAZZZZed",
+		"beforeActivateStatus": "none",
+		"beforeDeactivateStatus": "none",
+		"afterActivateStatus": "none",
+		"afterDeactivateStatus": "none",
 		currentStatus: "testxxx",
-		beforeActivateCallCount: 0,
-		beforeDeactivateCallCount: 0,
-		afterActivateCallCount: 0,
-		afterDeactivateCallCount: 0,
-		constructor: function (params) { // jshint unused:false
-			console.log("dapp/View:constructor called for " + this.id);
-		},
+		_beforeActivateCallCount: 0,
+		_beforeDeactivateCallCount: 0,
+		_afterActivateCallCount: 0,
+		_afterDeactivateCallCount: 0,
 		MODULE: "ddd",
 		init: function () {
 			console.log(this.MODULE + " init called");
