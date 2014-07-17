@@ -14,8 +14,8 @@
 		"dapp/controllers/jqm/Init",
 		"dapp/controllers/Logger",
 		"dapp/controllers/jqm/Load",
-		"dapp/controllers/jqm/Transition",
-		"dapp/controllers/History"
+		"dapp/controllers/jqm/Transition"//,
+	//	"dapp/controllers/History"
 	],
 
 	"dependencies": [
