@@ -26,9 +26,15 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 			// When the list is clicked, transition to dstore1AppHome2, pass the label of the selected item.
 			on(this.domNode.ownerDocument.getElementById("list1"), "click",
 				function (/*MouseEvent*/ evt) {
-					var label = evt.target.innerText || "";
+					var label = evt.target.innerText || evt.target.textContent || "";
 					var targetView = "dstore1AppHome2";
-					dstore1App.showOrHideViews(targetView,{viewData:label});
+					var params = {
+						viewData:{
+							label:label
+						}
+					};
+
+					dstore1App.showOrHideViews(targetView,params);
 				}
 			);
 
@@ -37,7 +43,7 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
 			this._beforeActivateCallCount++;
-			this.domNode.lastSelection = viewData || "";
+			this.domNode.lastSelection = viewData ? viewData.label : "";
 		},
 		beforeDeactivate: function (nextView, viewData) {
 			this.app.log("app-view:", "beforeDeactivate called for [" + this.viewName + "] with previousView.id =[" +

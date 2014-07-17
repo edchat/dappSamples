@@ -23,6 +23,7 @@
 	],
 
 	"parseOnLoad": true,
+	"loadViewsInOrder": true,
 
 	"containerSelector" : "#nested1App1dviewStack",
 
@@ -43,7 +44,7 @@
 			"views": {
 				"S1": {
 				//	"constraint": "main2",
-				//	"parentSelector": "#nested1App1dviewStack",
+					"parentSelector": "#pNode",
 					"controller": "simple2App1/parentController1.js",
 					"template": "simple2App1/subParentTemplate.html",
 					"defaultView": "V1",

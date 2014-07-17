@@ -1,0 +1,48 @@
+{
+	"id": "jqmApp",
+
+	"loaderConfig": {
+		"paths": {
+			"jqmApp": "../jqmApp"
+		}
+	},
+
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/jqm/Init",
+		"dapp/controllers/Logger",
+		"dapp/controllers/jqm/Load",
+		"dapp/controllers/jqm/Transition",
+		"dapp/controllers/History"
+	],
+
+	"dependencies": [
+	],
+
+	"containerSelector" : "#main",
+
+	"appLogging": {
+		"logAll": 1
+	},
+
+	"parseOnLoad": true,
+
+	"defaultView": "home",
+
+	"views": {
+		"home": {
+			"controller" : "jqmApp/home.js",
+			"constraint" : "center",
+		//	"parentSelector": "#maincontainer",
+			"template": "jqmApp/home.html"
+		},
+		"detail": {
+			"controller" : "jqmApp/detail.js",
+			"constraint" : "center",
+		//	"parentSelector": "#maincontainer",
+			"template": "jqmApp/detail.html"
+		}
+	}
+}

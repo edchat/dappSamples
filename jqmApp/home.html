@@ -1,0 +1,13 @@
+<div data-role="page">
+	Home - previous view:
+	<span id="homelabel"></span>
+    <ul data-role="listview">
+		<li on-click="jqmApp.showOrHideViews('detail',{transition:'slide'})">showOrHideViews('detail')</li>
+		<li on-click="jqmApp.showOrHideViews('detail',{transition:'slide', reverse: true})">showOrHideViews('detail',{transition:'slide', reverse: true})</li>
+		<li on-click="jqmApp.showOrHideViews('detail',{transition:'slide'})">showOrHideViews('detail',{transition:'slide'})</li>
+		<li on-click="jqmApp.showOrHideViews('detail',{transition:'pop', reverse: true})">showOrHideViews('detail',{transition:'pop', reverse: true})</li>
+		<li on-click="jqmApp.showOrHideViews('detail',{transition:'pop'})">showOrHideViews('detail',{transition:'pop'})</li>
+		<li><a href="#detail">Try 1 - having problem on initial display!</a></li>
+        <li><a href="#detail">Try 2</a></li>
+    </ul>
+</div>
