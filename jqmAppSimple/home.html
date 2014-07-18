@@ -1,0 +1,18 @@
+<div class="ui-content" data-role="page">
+	<div data-role="header">
+		Home - previous view:
+		<span id="homelabel"></span> - NOTE view is still creating the domNode as a delite widget with the template
+	</div>
+	<div data-role="content">
+		<ul data-role="listview">
+			<li><a on-click="jqmAppSimple.showOrHideViews('detail',{transition:'slide'})">showOrHideViews('detail')</a></li>
+			<li><a on-click="jqmAppSimple.showOrHideViews('detail',{transition:'slide', reverse: true})">showOrHideViews('detail',{transition:'slide', reverse: true})</a></li>
+			<li><a on-click="jqmAppSimple.showOrHideViews('detail',{transition:'slide'})">showOrHideViews('detail',{transition:'slide'})</a></li>
+			<li><a on-click="jqmAppSimple.showOrHideViews('detail',{transition:'pop', reverse: true})">showOrHideViews('detail',{transition:'pop', reverse: true})</a></li>
+			<li><a on-click="jqmAppSimple.showOrHideViews('detail',{transition:'pop'})">showOrHideViews('detail',{transition:'pop'})</a></li>
+			<li><a on-click="jqmAppSimple.showOrHideViews('-home',{transition:'pop'})">showOrHideViews('-home',{transition:'pop'}) Warning will hide the entire page!</a></li>
+			<li><a href="#detail">Try 1 href="#detail" - having problem on initial display!</a></li>
+			<li><a href="#detail">Try 2 href="#detail"</a></li>
+		</ul>
+	</div>
+</div>

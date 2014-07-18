@@ -1,9 +1,9 @@
 {
-	"id": "jqmApp",
+	"id": "jqmAppSimplePageInIndex",
 
 	"loaderConfig": {
 		"paths": {
-			"jqmApp": "../jqmApp"
+			"jqmAppSimplePageInIndex": "../jqmAppSimplePageInIndex"
 		}
 	},
 
@@ -30,19 +30,21 @@
 	"parseOnLoad": true,
 
 	"defaultView": "home",
+	"useParentNodeJqm": true,
+	"alwaysUseDefaultView" : true, // ignore any url hash when starting the app
 
 	"views": {
 		"home": {
-			"controller" : "jqmApp/home.js",
+			"controller" : "jqmAppSimplePageInIndex/home.js",
 			"constraint" : "center",
-		//	"parentSelector": "#maincontainer",
-			"template": "jqmApp/home.html"
+			"parentSelector": "#homeContainer",
+			"template": "jqmAppSimplePageInIndex/home.html"
 		},
 		"detail": {
-			"controller" : "jqmApp/detail.js",
+			"controller" : "jqmAppSimplePageInIndex/detail.js",
 			"constraint" : "center",
-		//	"parentSelector": "#maincontainer",
-			"template": "jqmApp/detail.html"
+			"parentSelector": "#detailContainer",
+			"template": "jqmAppSimplePageInIndex/detail.html"
 		}
 	}
 }
