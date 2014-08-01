@@ -25,7 +25,7 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 			this._beforeActivateCallCount++;
 			this.domNode.beforeActivateStatus = "called " + this._beforeActivateCallCount + " times";
 		},
-		beforeDeActivate: function (previousView, viewData) {
+		beforeDeactivate: function (previousView, viewData) {
 			console.log("in home.js beforeDeactivate called previousView=", previousView);
 			this._beforeDeactivateCallCount++;
 			this.domNode.beforeDeactivateStatus = "called " + this._beforeDeactivateCallCount + " times";

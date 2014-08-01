@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<title>dapp Transition Sample Application</title>
+
+	<link rel="stylesheet" href="app.css">
+
+	<!-- for requireJS -->
+	<script src="../../requirejs/require.js"></script>
+		<script>
+			require.config({
+			    paths: {
+			        "dapp": "../../dapp",
+					"dcl": "../../dcl",
+					"dojo": "../../dojo",
+					"dpointer": "../../dpointer",
+					"decor": "../../decor",
+					"delite": "../../delite",
+					"deliteful": "../../deliteful",
+					"requirejs": "../../requirejs",
+					"requirejs-text": "../../requirejs-text",
+					"requirejs-dplugins": "../../requirejs-dplugins",
+					"requirejs-domready": "../../requirejs-domready"
+			    },
+			    waitSeconds: 15
+			  });
+        </script>
+
+	<script>
+		require(["./transitionTestApp.js"]);
+	</script>
+
+	<style>
+		button {
+			width: 10em;
+		}
+		#vs > div {
+			font-size: 20px;
+			font-family: Helvetica;
+			text-align: center;
+			font-weight: bold;
+		}
+		#vs {
+			width: 50%;
+			height: 300px;
+			border: 2px solid gold
+		}
+	</style>
+
+	</head>
+	<body>
+	<d-linear-layout vertical="true"  class=" width100 height100 page">
+		<!-- Header -->
+		<d-linear-layout id="headerll" class=" width100 pageHeader">
+		</d-linear-layout>
+		<!-- Main content (ViewStack) -->
+		<d-view-stack id="vs" class="width100">
+		</d-view-stack>
+		<!-- Footer -->
+		<d-view-stack id="footerll" class="fill width100 pageFooter"  style="position: relative; background-color: pink;">
+		</d-view-stack>
+	</d-linear-layout>
+	</body>
+</html>

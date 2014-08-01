@@ -1,6 +1,6 @@
 // jshint unused:false, undef:false, quotmark:false
-define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Observable", "dojo/_base/declare"],
-	function (dom, on, register, MemoryStore, Observable, declare) {
+define(["dojo/dom", "delite/register", "dstore/Memory", "dstore/Observable", "dojo/_base/declare"],
+	function (dom, register, MemoryStore, Observable, declare) {
 	return {
 		name: "",
 		lastSelection: "",
@@ -24,7 +24,7 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 			list.store = this.loadedStores.list1Store;
 
 			// When the list is clicked, transition to dstore1AppHome2, pass the label of the selected item.
-			on(this.domNode.ownerDocument.getElementById("list1"), "click",
+			this.domNode.ownerDocument.getElementById("list1").on("click",
 				function (/*MouseEvent*/ evt) {
 					var label = evt.target.innerText || evt.target.textContent || "";
 					var targetView = "dstore1AppHome2";
@@ -40,28 +40,28 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 
 		},
 		beforeActivate: function (previousView, viewData) {
-			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
+			console.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
 			this._beforeActivateCallCount++;
 			this.domNode.lastSelection = viewData ? viewData.label : "";
 		},
 		beforeDeactivate: function (nextView, viewData) {
-			this.app.log("app-view:", "beforeDeactivate called for [" + this.viewName + "] with previousView.id =[" +
+			console.log("app-view:", "beforeDeactivate called for [" + this.viewName + "] with previousView.id =[" +
 				(nextView ? nextView.id : "") + "]");
 			this._beforeDeactivateCallCount++;
 		},
 		afterActivate: function (previousView, viewData) {
-			this.app.log("app-view:", "afterActivate called for [" + this.viewName + "] with previousView.id =[" +
+			console.log("app-view:", "afterActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
 			this._afterActivateCallCount++;
 		},
 		afterDeactivate: function (nextView, viewData) {
-			this.app.log("app-view:", "afterDeactivate called for [" + this.viewName + "] with previousView.id =[" +
+			console.log("app-view:", "afterDeactivate called for [" + this.viewName + "] with previousView.id =[" +
 				(nextView ? nextView.id : "") + "]");
 			this._afterDeactivateCallCount++;
 		},
 		destroy: function () {
-			this.app.log("app-view:", " in [" + this.viewName + "] destroy called for [" + this.id + "]");
+			console.log("app-view:", " in [" + this.viewName + "] destroy called for [" + this.id + "]");
 		}
 	};
 });

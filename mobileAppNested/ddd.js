@@ -18,7 +18,7 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		beforeActivate: function (previousView, viewData) {
 			console.log(this.MODULE + " beforeActivate called");
 		},
-		beforeDeActivate: function (previousView, viewData) {
+		beforeDeactivate: function (previousView, viewData) {
 			console.log(this.MODULE + " beforeDeactivate called previousView=", previousView);
 		},
 		afterActivate: function (previousView) {

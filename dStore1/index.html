@@ -14,35 +14,27 @@
 		-->
 
 		<!-- for requireJS -->
-		<!--  -->
 		<script src="../../requirejs/require.js"></script>
-			<script>
-				require.config({
-					/* either us baseUrl and paths or packages
-						baseUrl: "../..",
-						paths: {
-		        			"deliteApp": "dappSamples/deliteApp/deliteApp",
-							"config": "dappSamples/deliteApp/config"
-						},
-					*/
-						packages: [
-							{ name: "dapp", location : "../../dapp"},
-							{ name: "dcl", location : "../../dcl"},
-							{ name: "dojo", location : "../../dojo"},
-							{ name: "dpointer", location : "../../dpointer"},
-							{ name: "dstore", location : "../../dstore"},
-							{ name: "delite", location : "../../delite"},
-							{ name: "deliteful", location : "../../deliteful"},
-							{ name: "requirejs", location : "../../requirejs"},
-							{ name: "requirejs-text", location : "../../requirejs-text"},
-							{ name: "requirejs-domready", location : "../../requirejs-domready"},
-							{ name: "requirejs-dplugins", location : "../../requirejs-dplugins"}
-						],
-
-				    waitSeconds: 15
-				  });
-	        </script>
-		<!-- -->
+		<script>
+			require.config({
+			//    baseUrl: "/another/path",
+				paths: {
+					"dapp": "../../dapp",
+					"dcl": "../../dcl",
+					"dojo": "../../dojo",
+					"dpointer": "../../dpointer",
+					"decor": "../../decor",
+					"delite": "../../delite",
+					"deliteful": "../../deliteful",
+					"dstore": "../../dstore",
+					"requirejs": "../../requirejs",
+					"requirejs-text": "../../requirejs-text",
+					"requirejs-dplugins": "../../requirejs-dplugins",
+					"requirejs-domready": "../../requirejs-domready"
+				},
+				waitSeconds: 15
+			  });
+		</script>
 		<script>
 			require(["./App"]);
         </script>

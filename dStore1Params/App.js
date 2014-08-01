@@ -1,22 +1,22 @@
 // jshint unused:false, undef:false, quotmark:false
 require(["dojo/_base/window", "dapp/Application", "dojo/json", "requirejs-text/text!./app.json", "dojo/sniff"],
 	function (win, Application, json, config, has) {
-		win.global.dstore1ParamsApp = {};
-		win.global.dstore1ParamsApp.list1Data = {
+		window.dstore1ParamsApp = {};
+		window.dstore1ParamsApp.list1Data = {
 			identifier: "id",
 			'items':[]
 		};
 		for (i = 1; i < 6; i++) {
-			win.global.dstore1ParamsApp.list1Data.items.push({label: "Selection" + i, id: i});
+			window.dstore1ParamsApp.list1Data.items.push({label: "Selection" + i, id: i});
 		}
 
 
-		win.global.dstore1ParamsApp.list2Data = {
+		window.dstore1ParamsApp.list2Data = {
 			identifier: "id",
 			'items':[]
 		};
 		for (i = 6; i < 11; i++) {
-			win.global.dstore1ParamsApp.list2Data.items.push({label: "Selection" + i, id: i});
+			window.dstore1ParamsApp.list2Data.items.push({label: "Selection" + i, id: i});
 		}
 
 		has.add("requirejs", window.requirejs);

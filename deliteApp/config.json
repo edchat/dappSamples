@@ -3,14 +3,7 @@
 
 	"loaderConfig": {
 		"paths": {
-			"has" : {
-				"requirejs" : {
-					"deliteAppPath": "../deliteApp"
-				},
-				"!requirejs" : {
-					"deliteAppPath": "../dappSamples/deliteApp"
-				}
-			}
+			"deliteAppPath": "../deliteApp"
 		}
 	},
 

@@ -1,24 +1,26 @@
 // jshint unused:false, undef:false, quotmark:false
 define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) {
 	return {
-		testStringReplace: "xAZZZZed",
-		"beforeActivateStatus": "none",
-		"beforeDeactivateStatus": "none",
-		"afterActivateStatus": "none",
-		"afterDeactivateStatus": "none",
-		currentStatus: "testxxx",
-		_beforeActivateCallCount: 0,
-		_beforeDeactivateCallCount: 0,
-		_afterActivateCallCount: 0,
-		_afterDeactivateCallCount: 0,
-		MODULE: "vs",
+		MODULE: "ddd",
 		init: function () {
 			console.log(this.MODULE + " init called");
 		},
 		beforeActivate: function (previousView, viewData) {
+			if (this.domNode.ownerDocument.getElementById("footer")) {
+				this.domNode.ownerDocument.getElementById("footer").dddsel = true;
+			}
+			if (this.domNode.ownerDocument.getElementById("footerShow")) {
+				this.domNode.ownerDocument.getElementById("footerShow").dddsel = true;
+			}
 			console.log(this.MODULE + " beforeActivate called");
 		},
 		beforeDeactivate: function (previousView, viewData) {
+			if (this.domNode.ownerDocument.getElementById("footer")) {
+				this.domNode.ownerDocument.getElementById("footer").dddsel = false;
+			}
+			if (this.domNode.ownerDocument.getElementById("footerShow")) {
+				this.domNode.ownerDocument.getElementById("footerShow").dddsel = false;
+			}
 			console.log(this.MODULE + " beforeDeactivate called previousView=", previousView);
 		},
 		afterActivate: function (previousView) {

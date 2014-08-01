@@ -1,0 +1,87 @@
+{
+	"id": "ttApp",
+
+	"loaderConfig": {
+		"paths": {
+			"transitionTestApp": "../transitionTestApp"
+		}
+	},
+
+	"containerSelector" : "#vs",
+
+	"modules": [
+	],
+
+	"parseOnLoad": true,
+
+	"dependencies": [
+		"delite/register",
+		"deliteful/ViewStack",
+		"deliteful/LinearLayout",
+		"deliteful/Button",
+		"delite/css!deliteful/ViewStack/transitions/cover.css",
+		"delite/css!deliteful/ViewStack/transitions/coverv.css",
+		"delite/css!deliteful/ViewStack/transitions/fade.css",
+		"delite/css!deliteful/ViewStack/transitions/flip.css",
+		"delite/css!deliteful/ViewStack/transitions/slidev.css",
+		"delite/css!deliteful/ViewStack/transitions/revealv.css",
+		"delite/theme!delite/themes/{{theme}}/global.css"	// page level CSS
+	],
+
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/Logger",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/History"
+	],
+
+	"appLogging": {
+		"logAll": 1
+	},
+
+	"defaultView": "header+aaa+footer",
+
+	"views": {
+		"aaa": {
+			"constraint": "vs",
+			"parentSelector": "#vs",
+			"controller" : "transitionTestApp/aaa.js",
+			"template": "transitionTestApp/aaa.html"
+		},
+		"bbb": {
+			"constraint": "vs",
+			"parentSelector": "#vs",
+			"controller" : "transitionTestApp/bbb.js",
+			"template": "transitionTestApp/bbb.html"
+		},
+		"ccc": {
+			"constraint": "vs",
+			"parentSelector": "#vs",
+			"controller" : "transitionTestApp/ccc.js",
+			"template": "transitionTestApp/ccc.html"
+		},
+		"ddd": {
+			"constraint": "vs",
+			"parentSelector": "#vs",
+			"controller" : "transitionTestApp/ddd.js",
+			"template": "transitionTestApp/ddd.html"
+		},
+		"header": {
+			"parentSelector": "#headerll",
+			"template": "transitionTestApp/header.html"
+		},
+		"footer": {
+			"parentSelector": "#footerll",
+			"constraint": "footerll",
+			"controller" : "transitionTestApp/footer.js",
+			"template": "transitionTestApp/footer.html"
+		},
+		"footerShow": {
+			"parentSelector": "#footerll",
+			"constraint": "footerll",
+			"controller" : "transitionTestApp/footerShow.js",
+			"template": "transitionTestApp/footerShow.html"
+		}
+	}
+}

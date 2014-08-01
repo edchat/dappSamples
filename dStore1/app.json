@@ -3,14 +3,7 @@
 	"name": "dstore1App",
 	"loaderConfig": {
 		"paths": {
-			"has" : {
-				"requirejs" : {
-					"dstore1App": "../dstore1"
-				},
-				"!requirejs" : {
-					"dstore1App": "../dappSamples/dstore1"
-				}
-			}
+			"dstore1App": "../dstore1"
 		}
 	},
 	"modules": [

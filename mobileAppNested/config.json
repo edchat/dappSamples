@@ -3,14 +3,7 @@
 
 	"loaderConfig": {
 		"paths": {
-			"has" : {
-				"requirejs" : {
-					"mobileAppNested": "../mobileAppNested"
-				},
-				"!requirejs" : {
-					"mobileAppNested": "../dappSamples/mobileAppNested"
-				}
-			}
+			"mobileAppNested": "../mobileAppNested"
 		}
 	},
 
@@ -28,6 +21,13 @@
 		"deliteful/SidePane",
 		"deliteful/LinearLayout",
 		"deliteful/Button"
+		,"delite/css!deliteful/ViewStack/transitions/cover.css",
+		"delite/css!deliteful/ViewStack/transitions/coverv.css",
+		"delite/css!deliteful/ViewStack/transitions/fade.css",
+		"delite/css!deliteful/ViewStack/transitions/flip.css",
+		"delite/css!deliteful/ViewStack/transitions/slidev.css",
+		"delite/css!deliteful/ViewStack/transitions/revealv.css",
+		"delite/theme!delite/themes/{{theme}}/global.css"	// page level CSS
 	],
 
 
@@ -39,6 +39,9 @@
 		"dapp/controllers/History"
 	],
 
+	"appLogging": {
+		"logAll": 1
+	},
 	"defaultView": "vs,aaa+footer",
 
 	"views": {
@@ -88,7 +91,7 @@
 			}
 		},
 		"footer": {
-			"constraint": "vsparent",  // this is a hack for now used in layout...
+			"constraint": "footer",  // this is a hack for now used in layout...
 			"parentSelector": "#vsparent",
 			"controller" : "mobileAppNested/footer.js",
 			"template": "mobileAppNested/footer.html"

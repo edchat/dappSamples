@@ -3,14 +3,7 @@
 
 	"loaderConfig": {
 		"paths": {
-			"has" : {
-				"requirejs" : {
-					"mobileApp": "../mobileApp"
-				},
-				"!requirejs" : {
-					"mobileApp": "../dappSamples/mobileApp"
-				}
-			}
+			"mobileApp": "../mobileApp"
 		}
 	},
 

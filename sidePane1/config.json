@@ -33,6 +33,13 @@
 		"deliteful/LinearLayout",
 		"deliteful/ViewStack",
 		"deliteful/SidePane"
+		,"delite/css!deliteful/ViewStack/transitions/cover.css",
+		"delite/css!deliteful/ViewStack/transitions/coverv.css",
+		"delite/css!deliteful/ViewStack/transitions/fade.css",
+		"delite/css!deliteful/ViewStack/transitions/flip.css",
+		"delite/css!deliteful/ViewStack/transitions/slidev.css",
+		"delite/css!deliteful/ViewStack/transitions/revealv.css",
+		"delite/theme!delite/themes/{{theme}}/global.css"	// page level CSS
 	],
 
 	"containerSelector" : "#nested1App1dviewStack",
