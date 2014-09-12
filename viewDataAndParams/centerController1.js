@@ -22,7 +22,7 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 			//}
 		},
 		init: function () {
-			this.domNode.name = this.id;
+			this.name = this.id;
 			// attempt to slow down the creation of this widget to see if Home3 would be placed before it
 			if (this.id === "nested1App1Home2") {
 				//setTimeout(function () {
@@ -35,14 +35,14 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		beforeActivate: function (previousView, viewData) {
 			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
-			this.domNode.myViewData = viewData ? viewData.vd1 : "";
-			this.domNode.myParamsP = this.viewParams ? this.viewParams.p : "";
-			this.domNode.myParamsVp = this.viewParams ? this.viewParams.vp : "";
+			this.myViewData = viewData ? viewData.vd1 : "";
+			this.myParamsP = this.viewParams ? this.viewParams.p : "";
+			this.myParamsVp = this.viewParams ? this.viewParams.vp : "";
 			this._beforeActivateCallCount++;
 			if (this.id === "center1") {
-				this.domNode.style.backgroundColor = "cyan";
+				this.style.backgroundColor = "cyan";
 			} else {
-				this.domNode.style.backgroundColor = "green";
+				this.style.backgroundColor = "green";
 			}
 		},
 		beforeDeactivate: function (nextView, viewData) {

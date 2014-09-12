@@ -1,0 +1,51 @@
+{
+	"id": "jqmAppSimplePageIndex",
+
+	"loaderConfig": {
+		"paths": {
+			"jqmAppSimplePageIndex": "../jqmAppSimplePageIndex"
+		}
+	},
+
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/jqm/Init",
+		"dapp/controllers/jqm/Load",
+		"dapp/controllers/jqm/Transition",
+	//	"dapp/controllers/History",
+		"dapp/controllers/Logger"
+	],
+
+	"dependencies": [
+		"delite/css!jquery.mobile.css/jquery.mobile-1.4.3.min.css"
+	],
+
+	"appLogging": {
+		"logAll": 1
+	},
+
+
+	"containerSelector" : "#main",
+	"parseOnLoad": true,
+	//"defaultView": "detail+home", // preload detail to allow hash to transition on first page...
+	"defaultView": "home",
+	"alwaysUseDefaultView" : true, // ignore any url hash when starting the app
+	//"hideUrlHash": true,
+
+	"views": {
+		"home": {
+			"controller" : "jqmAppSimplePageIndex/home.js",
+			"constraint" : "center",
+			//"parentSelector": "#homeContainer",
+			"template": "jqmAppSimplePageIndex/home.html"
+		},
+		"detail": {
+			"controller" : "jqmAppSimplePageIndex/detail.js",
+			"constraint" : "center",
+			//"parentSelector": "#detailContainer",
+			"template": "jqmAppSimplePageIndex/detail.html"
+		}
+	}
+}

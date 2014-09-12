@@ -7,7 +7,7 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		_afterActivateCallCount: 0,
 		_afterDeactivateCallCount: 0,
 		init: function () {
-			this.domNode.name = this.id;
+			this.name = this.id;
 		},
 		beforeActivate: function (previousView, viewData) {
 			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +

@@ -1,0 +1,81 @@
+{
+	"id": "noDomNodeApp",
+	"name": "noDomNodeApp",
+	"loaderConfig": {
+		"paths": {
+			"noDomNodeApp": "../noDomNodeApp"
+		}
+	},
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/Logger",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/History"
+	],
+
+	"dependencies": [
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack"
+	],
+
+	"parseOnLoad": true,
+	"loadViewsInOrder": true,
+
+	"containerSelector" : "#nested1App1dviewStack",
+
+	"appLogging": {
+		"logAll": 1
+	},
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	"defaultView": "P1,S1,V1",
+	//"defaultView": "P2",
+	"views": {
+		"P1": {
+		//	"constraint": "main",
+			"parentSelector": "#nested1App1dviewStack",
+			"controller": "noDomNodeApp/parentController1.js",
+			"template": "noDomNodeApp/parentTemplate.html",
+			"defaultView": "S1",
+			"views": {
+				"S1": {
+				//	"constraint": "main2",
+					"parentSelector": "#pNode",
+					"controller": "noDomNodeApp/parentController1.js",
+					"template": "noDomNodeApp/subParentTemplate.html",
+					"defaultView": "V1",
+					"views": {
+						"V1": {
+				//			"constraint": "main3",
+						//	"parentSelector": "#nested1App1dviewStack",
+							"controller": "noDomNodeApp/viewController1.js",
+							"template": "noDomNodeApp/viewTemplate.html"
+						},
+						"V2": {
+				//			"constraint": "main3",
+						//	"parentSelector": "#nested1App1dviewStack",
+							"controller": "noDomNodeApp/viewController1.js",
+							"template": "noDomNodeApp/viewTemplate.html"
+						}
+					}
+				}
+			}
+		},
+		"V7": {
+		//	"constraint": "main",
+			"parentSelector": "#nested1App1dviewStack",
+			"controller": "noDomNodeApp/viewController1.js",
+			"template": "noDomNodeApp/viewTemplate.html"
+		},
+		"P2": {
+		//	"constraint": "main",
+			"parentSelector": "#nested1App1dviewStack",
+			"controller": "noDomNodeApp/parentController1.js",
+			"template": "noDomNodeApp/viewTemplate1.html"
+		}
+	}
+}

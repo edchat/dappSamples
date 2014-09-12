@@ -1,0 +1,63 @@
+{
+	"id": "noDomNodeApp",
+	"name": "noDomNodeApp",
+	"loaderConfig": {
+		"paths": {
+			"noDomNodeApp": "../noDomNodeApp"
+		}
+	},
+	"modules": [
+	],
+
+	"controllers": [
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/Logger",
+		"dapp/controllers/History"
+	],
+
+	"dependencies": [
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack"
+	],
+
+	"parseOnLoad": true,
+	"loadViewsInOrder": true,
+
+	"appLogging": {
+		"logAll": 1
+	},
+
+	//"template": "noDomNodeApp/mainTemplate.html",
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	"defaultView": "noDomNodeAppHome1",
+	"views": {
+		"noDomNodeAppHome1": {
+			"constraint": "main",
+			"parentSelector": "#noDomNodeAppdviewStack",
+		// TODO, I could not use the loaderConfig path for noDomNodeApp here, not sure why it did not find the template
+		//	"template": "noDomNodeApp/viewTemplate3.html"
+		//	"controller": "noDomNodeApp/viewController1.js",
+		//	"type": "noDomNodeApp/customWidget",
+			"type": "noDomNodeApp/viewController1",
+			"template": "noDomNodeApp/viewTemplate3.html"
+		},
+		"noDomNodeAppHome3NoController": {
+			"constraint": "main",
+			"parentSelector": "#noDomNodeAppdviewStack",
+		//	"controller": "noDomNodeApp/viewController1.js",
+			"type": "noDomNodeApp/viewController1",
+			"template": "noDomNodeApp/viewTemplate3.html"
+		},
+		"noDomNodeAppHome2": {
+			"constraint": "main",
+			"parentSelector": "#noDomNodeAppdviewStack",
+		//	"controller": "noDomNodeApp/viewController1.js",
+			"type": "noDomNodeApp/viewController1",
+			"template": "noDomNodeApp/viewTemplate3.html"
+		}
+
+	}
+}

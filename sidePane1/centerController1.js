@@ -8,7 +8,11 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		_afterActivateCallCount: 0,
 		_afterDeactivateCallCount: 0,
 		init: function () {
-			this.domNode.name = this.id;
+			if(this) {
+				this.name = this.id;
+			} else {
+				this.name = this.id;
+			}
 			// attempt to slow down the creation of this widget to see if Home3 would be placed before it
 			if (this.id === "nested1App1Home2") {
 				//setTimeout(function () {
@@ -21,16 +25,30 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		beforeActivate: function (previousView, viewData) {
 			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
-			if(viewData && viewData.subData) {
-				this.domNode.data = viewData.subData;
-			}else{
-				this.domNode.data = viewData;
-			}
-			this._beforeActivateCallCount++;
-			if (this.id === "center1") {
-				this.domNode.style.backgroundColor = "cyan";
+			if(this) {
+				if(viewData && viewData.subData) {
+					this.data = viewData.subData;
+				}else{
+					this.data = viewData;
+				}
+				this._beforeActivateCallCount++;
+				if (this.id === "center1") {
+					this.style.backgroundColor = "cyan";
+				} else {
+					this.style.backgroundColor = "green";
+				}
 			} else {
-				this.domNode.style.backgroundColor = "green";
+				if(viewData && viewData.subData) {
+					this.data = viewData.subData;
+				}else{
+					this.data = viewData;
+				}
+				this._beforeActivateCallCount++;
+				if (this.id === "center1") {
+					this.style.backgroundColor = "cyan";
+				} else {
+					this.style.backgroundColor = "green";
+				}
 			}
 		},
 		beforeDeactivate: function (nextView, viewData) {

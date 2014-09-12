@@ -1,7 +1,6 @@
 // jshint unused:false, undef:false, quotmark:false
 require(["dapp/Application", //"dojo/json",
 		"requirejs-text/text!./config.json",
-		/*"requirejs-text/text!./dapp/samples/transitionTestApp/config.json",*/
 		"dojo/sniff"
 	],
 	function (Application, /*json,*/ config, has) {

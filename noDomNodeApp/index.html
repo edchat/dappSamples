@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/> 
+		<meta name="apple-mobile-web-app-capable" content="yes" /> 
+		<title>noDomNodeApp Test 3</title>
+		<link rel="stylesheet" href="../../delite/themes/defaultapp.css">
+
+		<link rel="stylesheet" href="app.css">
+
+		<script src="../../requirejs/require.js"></script>
+			<script>
+				require.config({
+				//    baseUrl: "/another/path",
+				    paths: {
+				        "dapp": "../../dapp",
+						"dcl": "../../dcl",
+						"dojo": "../../dojo",
+						"dpointer": "../../dpointer",
+						"decor": "../../decor",
+						"delite": "../../delite",
+						"deliteful": "../../deliteful",
+						"requirejs": "../../requirejs",
+						"requirejs-text": "../../requirejs-text",
+						"requirejs-dplugins": "../../requirejs-dplugins",
+						"requirejs-domready": "../../requirejs-domready"
+				    },
+				    waitSeconds: 15
+				  });
+	        </script>
+		<script>
+			require(["./App1"]);
+        </script>
+	</head>
+	<body style="width:100%; height: 100%">
+		<d-view-stack id='noDomNodeAppdviewStack' style='width: 100%; height: 100%; position: absolute !important'>
+		</d-view-stack>
+	</body>
+</html>

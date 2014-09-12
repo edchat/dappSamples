@@ -1,6 +1,6 @@
 // jshint unused:false, undef:false, quotmark:false
-define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Observable", "dojo/_base/declare"],
-	function (dom, on, register, MemoryStore, Observable, declare) {
+define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Trackable", "dojo/_base/declare"],
+	function (dom, on, register, MemoryStore, Trackable, declare) {
 	return {
 		name: "",
 		lastSelection: "",
@@ -14,12 +14,12 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 			var tempName = "";
 		},
 		init: function () {
-			this.domNode.name = this.id;
-			var list = this.domNode.ownerDocument.getElementById("list2");
+			this.name = this.id;
+			var list = this.ownerDocument.getElementById("list2");
 
-			// Different options for creating the store, 1. ObservableStore, add data below
-			//var ObservableMemoryStore = declare([MemoryStore, Observable], {});
-			//list.store = new ObservableMemoryStore();
+			// Different options for creating the store, 1. TrackableStore, add data below
+			//var TrackableMemoryStore = declare([MemoryStore, Trackable], {});
+			//list.store = new TrackableMemoryStore();
 			// Different options for creating the store, 2. MemoryStore, add data below
 			//list.store = new MemoryStore();
 			//for (i = 1; i < 6; i++) {
@@ -29,7 +29,7 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 			list.store = this.loadedStores.list2Store;
 
 			// When the list is clicked, transition to dstore1AppHome2, pass the label of the selected item.
-			on(this.domNode.ownerDocument.getElementById("list2"), "click",
+			on(this.ownerDocument.getElementById("list2"), "click",
 				function (/*MouseEvent*/ evt) {
 					var label = evt.target.innerText || "";
 				//	var viewParams = {
@@ -52,7 +52,7 @@ define(["dojo/dom", "dojo/on", "delite/register", "dstore/Memory", "dstore/Obser
 			console.log("app-view:", "beforeActivate called with this.viewParams.lastSel = [" +
 				(this.viewParams ? this.viewParams.lastSel : "") + "]");
 			this._beforeActivateCallCount++;
-			this.domNode.lastSelection = this.viewParams.lastSel ? this.viewParams.lastSel : "";
+			this.lastSelection = this.viewParams.lastSel ? this.viewParams.lastSel : "";
 		},
 		beforeDeactivate: function (nextView, viewData) {
 			this.app.log("app-view:", "beforeDeactivate called for [" + this.viewName + "] with previousView.id =[" +

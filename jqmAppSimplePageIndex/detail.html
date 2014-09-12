@@ -1,0 +1,22 @@
+<div class="ui-content">
+	<div data-role="header">
+		<h4>A detail - previous view:<span id="detailslabel"></span>
+			<br> NOTE view is created the as a delite widget with the template
+		</h4>
+	</div>
+	<div data-role="content">
+		<ul data-role="listview">
+			<li><a on-click="jqmAppSimplePageIndex.showOrHideViews('home',{transition:'slide'})">showOrHideViews('home')</a></li>
+			<li><a on-click="jqmAppSimplePageIndex.showOrHideViews('home',{transition:'slide', reverse: true})">showOrHideViews('home',{transition:'slide', reverse: true})</a></li>
+			<li><a on-click="jqmAppSimplePageIndex.showOrHideViews('home',{transition:'slide'})">showOrHideViews('home',{transition:'slide'})</a></li>
+			<li><a on-click="jqmAppSimplePageIndex.showOrHideViews('home',{transition:'pop', reverse: true})">showOrHideViews('home',{transition:'pop', reverse: true})</a></li>
+			<li><a on-click="jqmAppSimplePageIndex.showOrHideViews('home',{transition:'pop'})">showOrHideViews('home',{transition:'pop'})</a></li>
+			<li><a on-click="jqmAppSimplePageIndex.showOrHideViews('-detail',{transition:'pop'})">showOrHideViews('-detail',{transition:'pop'}) Warning will hide the entire page!</a></li>
+			<li><a href="#home">Try 1 href="#home" - NOTE: will not work with $.mobile.hashListeningEnabled = false; </a></li>
+			<li><a href="#home">Try 2 href="#home" - NOTE: and having problem on initial display if home is not preloaded!</a></li>
+		</ul>
+	</div>
+	<div data-role="footer">
+		<h4>Footer content detail</h4>
+	</div>
+</div>

@@ -22,18 +22,21 @@
 	],
 
 	"controllers": [
+		//"dapp/controllers/noDomNode/Init",
+		//"dapp/controllers/noDomNode/Load",
+		//"dapp/controllers/noDomNode/Transition",
 		"dapp/controllers/delite/Init",
-		"dapp/controllers/Logger",
 		"dapp/controllers/delite/Load",
 		"dapp/controllers/delite/Transition",
+		"dapp/controllers/Logger",
 		"dapp/controllers/History"
 	],
 
 	"dependencies": [
 		"deliteful/LinearLayout",
 		"deliteful/ViewStack",
-		"deliteful/SidePane"
-		,"delite/css!deliteful/ViewStack/transitions/cover.css",
+		"deliteful/SidePane",
+		"delite/css!deliteful/ViewStack/transitions/cover.css",
 		"delite/css!deliteful/ViewStack/transitions/coverv.css",
 		"delite/css!deliteful/ViewStack/transitions/fade.css",
 		"delite/css!deliteful/ViewStack/transitions/flip.css",
@@ -46,7 +49,7 @@
 
 	"appLogging": {
 		"logAll": 1,
-		"logTimeStamp": 0
+		"logTimeStamp": 1
 	},
 
 	"parseOnLoad": true,
@@ -58,7 +61,7 @@
 	"hideUrlHash": false,
 //	"defaultView": "centerParent+header1+right1+footer1",
 //	"defaultView": "header1",
-//	"loadViewsInOrder": true,
+	"loadViewsInOrder": true,
 
 	"views": {
 		"header1": {

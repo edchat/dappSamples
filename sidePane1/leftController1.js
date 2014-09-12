@@ -7,17 +7,16 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		_afterActivateCallCount: 0,
 		_afterDeactivateCallCount: 0,
 		init: function () {
-			this.domNode.name = this.id;
-			// attempt to slow down the creation of this widget to see if Home3 would be placed before it
+			this.name = this.id;
 		},
 		beforeActivate: function (previousView, viewData) {
 			this.app.log("app-view:", "beforeActivate called for [" + this.viewName + "] with previousView.id =[" +
 				(previousView ? previousView.id : "") + "] with viewData=", viewData);
 			this._beforeActivateCallCount++;
 			if (this.id === "right1") {
-				this.domNode.style.backgroundColor = "darkgoldenrod";
+				this.style.backgroundColor = "darkgoldenrod";
 			} else {
-				this.domNode.style.backgroundColor = "orange";
+				this.style.backgroundColor = "orange";
 			}
 		},
 		beforeDeactivate: function (nextView, viewData) {

@@ -17,56 +17,13 @@
 				padding: 0;
 			}
 		</style>
-		<link rel="stylesheet" type="text/css"  href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.css">
+	<!--	<link rel="stylesheet" type="text/css"  href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.css"> -->
 
-
-		<!-- for dojo -->
-		<!--
-		<script type="text/javascript" data-dojo-config="async: true" src="../../../dojo/dojo.js"></script>
-		-->
-		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.js"></script>
-
-		<!-- for requireJS -->
-		<!--  -->
-		<script src="../../requirejs/require.js"></script>
-		<script>
-			require.config({
-			//    baseUrl: "/another/path",
-				paths: {
-					"dapp": "../../dapp",
-					"dcl": "../../dcl",
-					"dojo": "../../dojo",
-					"dpointer": "../../dpointer",
-					"decor": "../../decor",
-					"delite": "../../delite",
-					"deliteful": "../../deliteful",
-					"requirejs": "../../requirejs",
-					"requirejs-text": "../../requirejs-text",
-					"requirejs-dplugins": "../../requirejs-dplugins",
-					"requirejs-domready": "../../requirejs-domready"
-				},
-				waitSeconds: 15
-			  });
-		</script>
-		<!-- -->
+		<script type="text/javascript" data-main="./main" src="../../requirejs/require.js"></script>
 		<script>
 			require(["./jqmAppSimple"]);
         </script>
 	</head>
 	<body>
-	<!-- ELC had problems when running with useParentNodeJqm false and having content in the body, it would add a
-		 data-role="page" inside the body around the main section and that caused problems for the transitions...
-		 I even tried to add the dappDummy node and remove it to avoid the auto added one, but I still get double
-		 transitions at times....
-		 -->
-	<!--
-		<div id="main" style="width:100%; height: 100%">
-			<div id="homeContainer"></div>
-			<div id="detailContainer"></div>
-		</div>
-	<!--
-	<div id="dappDummy" data-role="page"></div>
-	-->
 	</body>
 </html>

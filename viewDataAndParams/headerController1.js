@@ -7,7 +7,7 @@ define(["dojo/dom", "dojo/on", "delite/register"], function (dom, on, register) 
 		_afterActivateCallCount: 0,
 		_afterDeactivateCallCount: 0,
 		init: function () {
-			this.domNode.name = this.id;
+			this.name = this.id;
 			// attempt to slow down the creation of this widget to see if Home3 would be placed before it
 			if (this.id === "nested1App1Home2") {
 				//setTimeout(function () {

@@ -5,8 +5,8 @@ define(["dojo/dom", "dojo/on"], function (dom, on) {
 		MODULE: "detail",
 		init: function () {
 			console.log("in detail.js init called");
-			//	on(this.domNode.ownerDocument.getElementById("detaillabel2"), "click",
-			on(this.domNode.querySelectorAll(".detaillabel2")[0], "click",
+			//	on(this.ownerDocument.getElementById("detaillabel2"), "click",
+			on(this.querySelectorAll(".detaillabel2")[0], "click",
 				//	on(document.getElementById(this.viewIdPlusLi), "click",
 				function () {
 				//var vdata = {"subData" : "subData1"}
