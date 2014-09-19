@@ -1,0 +1,137 @@
+{
+	"id": "responsiveColumnsApp1",
+	"name": "responsiveColumnsApp1",
+	"loaderConfig": {
+		"paths": {
+			"responsiveColumnsApp1": "../responsiveColumns"
+		}
+	},
+//	"loaderConfig": {
+//		"paths": {
+//			"has" : {
+//				"requirejs" : {
+//					"responsiveColumnsApp1": "../responsiveColumns"
+//				},
+//				"!requirejs" : {
+//					"responsiveColumnsApp1": "../dappSamples/responsiveColumns"
+//				}
+//			}
+//		}
+//	},
+	"modules": [
+	],
+
+	"controllers": [
+		//"dapp/controllers/noDomNode/Init",
+		//"dapp/controllers/noDomNode/Load",
+		//"dapp/controllers/noDomNode/Transition",
+		"dapp/controllers/delite/Init",
+		"dapp/controllers/delite/Load",
+		"dapp/controllers/delite/Transition",
+		"dapp/controllers/Logger",
+		"dapp/controllers/History"
+	],
+
+	"dependencies": [
+		"deliteful/LinearLayout",
+		"deliteful/ViewStack",
+		"deliteful/SidePane",
+		"deliteful/ResponsiveColumns",
+	//	"delite/css!deliteful/ViewStack/transitions/cover.css",
+	//	"delite/css!deliteful/ViewStack/transitions/coverv.css",
+	//	"delite/css!deliteful/ViewStack/transitions/fade.css",
+	//	"delite/css!deliteful/ViewStack/transitions/flip.css",
+	//	"delite/css!deliteful/ViewStack/transitions/slidev.css",
+	//	"delite/css!deliteful/ViewStack/transitions/revealv.css",
+		"delite/theme!delite/themes/{{theme}}/global.css"	// page level CSS
+	],
+
+	"containerSelector" : "#nested1App1dviewStack",
+
+	"appLogging": {
+		"logAll": 1,
+		"logTimeStamp": 1
+	},
+
+	"parseOnLoad": true,
+
+	//TODO: There is a problem with using duplicate view names across tests, getting duplicate view error!!!
+	//"defaultView": "P1,S1,V1",
+	"defaultView": "header1+centerParent+center1+right1+footer1+leftParent,left1",
+	"alwaysUseDefaultView" : true, // ignore any url hash when starting the app
+	"hideUrlHash": false,
+//	"defaultView": "centerParent+header1+right1+footer1",
+//	"defaultView": "header1",
+	"loadViewsInOrder": true,
+
+	"views": {
+		"header1": {
+		//	"constraint": "header",
+			"parentSelector": "#headerViewStack",
+			"controller": "responsiveColumnsApp1/headerController1.js",
+			"template": "responsiveColumnsApp1/headerTemplate1.html"
+		},
+		"leftParent": {
+		//	"constraint": "centerParent",
+			"loadViewsInOrder": true,
+			"parentSelector": "#leftPane",
+			"controller": "responsiveColumnsApp1/parentController1.js",
+			"template": "responsiveColumnsApp1/leftSubParentTemplate.html",
+		//	"template": "responsiveColumnsApp1/parentTemplate.html",
+			"defaultView": "left1",
+			"views": {
+				"left1": {
+				//	"constraint": "left",
+				//	"parentSelector": "#leftViewStack",
+					"controller": "responsiveColumnsApp1/leftController1.js",
+					"template": "responsiveColumnsApp1/leftTemplate1.html"
+				},
+				"left2": {
+				//	"constraint": "left",
+				//	"parentSelector": "#leftViewStack",
+					"controller": "responsiveColumnsApp1/leftController1.js",
+					"template": "responsiveColumnsApp1/leftTemplate1.html"
+				}
+			}
+		},
+		"centerParent": {
+		//	"constraint": "centerParent",
+			"loadViewsInOrder": true,
+			"parentSelector": "#centerLinearLayout",
+			"controller": "responsiveColumnsApp1/parentController1.js",
+			"template": "responsiveColumnsApp1/subParentTemplate.html"
+		},
+		"center1": {
+		//	"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"loadViewsInOrder": true,
+			"controller": "responsiveColumnsApp1/centerController1.js",
+			"template": "responsiveColumnsApp1/centerTemplate1.html"
+		},
+		"center2": {
+		//	"constraint": "center",
+			"parentSelector": "#centerViewStack",
+			"loadViewsInOrder": true,
+			"controller": "responsiveColumnsApp1/centerController1.js",
+			"template": "responsiveColumnsApp1/centerTemplate1.html"
+		},
+		"right1": {
+		//	"constraint": "right1",
+			"parentSelector": "#rightPane",
+			"controller": "responsiveColumnsApp1/rightController1.js",
+			"template": "responsiveColumnsApp1/rightTemplate1.html"
+		},
+		"right2": {
+		//	"constraint": "right2",
+			"parentSelector": "#rightPane",
+			"controller": "responsiveColumnsApp1/rightController1.js",
+			"template": "responsiveColumnsApp1/rightTemplate1.html"
+		},
+		"footer1": {
+		//	"constraint": "footer",
+			"parentSelector": "#footerViewStack",
+			"controller": "responsiveColumnsApp1/footerController1.js",
+			"template": "responsiveColumnsApp1/footerTemplate1.html"
+		}
+	}
+}

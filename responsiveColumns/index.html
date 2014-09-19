@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/> 
+		<meta name="apple-mobile-web-app-capable" content="yes" /> 
+		<title>responsiveColumns App Test</title>
+		<link rel="stylesheet" href="../../delite/themes/defaultapp.css">
+
+		<link rel="stylesheet" href="app.css">
+
+		<!-- for dojo -->
+		<!--
+		<script type="text/javascript" data-dojo-config="async: true" src="../../dojo/dojo.js"></script>
+		-->
+
+		<!-- for requireJS -->
+		<!--  -->
+		<script src="../../requirejs/require.js"></script>
+		<script>
+			require.config({
+			//    baseUrl: "/another/path",
+				paths: {
+					"dapp": "../../dapp",
+					"dcl": "../../dcl",
+					"dojo": "../../dojo",
+					"dpointer": "../../dpointer",
+					"decor": "../../decor",
+					"delite": "../../delite",
+					"deliteful": "../../deliteful",
+					"requirejs": "../../requirejs",
+					"requirejs-text": "../../requirejs-text",
+					"requirejs-dplugins": "../../requirejs-dplugins",
+					"requirejs-domready": "../../requirejs-domready"
+				},
+				waitSeconds: 15
+			  });
+		</script>
+		<!-- -->
+		<script>
+			require(["./App1"]);
+        </script>
+	</head>
+	<body style="width:100%; height: 100%">
+	<div style="position: relative; height: 100%">
+		<d-responsive-columns id="rc" style="width: 100%; height: 100%"
+							  breakpoints="{'phone': '500px', 'tablet': '900px', 'desktop': '99999px'}">
+			<div style="background-color: #bce8f1;" layout="{'phone': 'hidden', 'tablet': '200px', 'desktop': '20%'}">
+				<d-linear-layout id="leftPane" style="width:100%; height: 100%" vertical='false'></d-linear-layout>
+			</div>
+			<div style="background-color: #46b8da;" layout="{'phone': '100%', 'tablet': 'fill', 'desktop': '60%'}">
+				<d-linear-layout id="centerLinearLayout" style="width:100%; height: 100%" vertical='false'></d-linear-layout>
+			</div>
+			<div style="background-color: #007fea;" layout="{'phone': 'hidden', 'tablet': 'hidden', 'desktop': '20%'}">
+				<d-linear-layout id="rightPane" style="width:100%; height: 100%" vertical='false'></d-linear-layout>
+			</div>
+		</d-responsive-columns>
+
+		<!--(note initial size was not be set right, had to set ; height: 100% above)
+		<d-side-pane mode="push" position="start" id="leftPane" style="background-color: lavender;"></d-side-pane>
+		<d-linear-layout style="width:100%; height: 100%">
+			<d-view-stack id="headerViewStack" style="width: 100%; height: 10%;"></d-view-stack>
+			<d-linear-layout id="centerLinearLayout" style="width:100%; height: 100%" vertical='false'></d-linear-layout>
+			<d-view-stack id="footerViewStack" style="width: 100%; height: 10%;"></d-view-stack>
+		</d-linear-layout>
+		<d-side-pane position="end" id="rightPane"  style="background-color: lightgoldenrodyellow;"></d-side-pane>
+	-->
+	</div>
+	</body>
+</html>

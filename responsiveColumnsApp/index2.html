@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<title>Responsize Columns Test App - no dapp</title>
+
+	<link rel="stylesheet" href="app.css">
+
+	<!-- for requireJS -->
+	<script src="../../requirejs/require.js"></script>
+	<script>
+		require.config({
+			paths: {
+				"dapp": "../../dapp",
+				"dcl": "../../dcl",
+				"dojo": "../../dojo",
+				"dpointer": "../../dpointer",
+				"decor": "../../decor",
+				"delite": "../../delite",
+				"deliteful": "../../deliteful",
+				"dstore": "../../dstore",
+				"requirejs": "../../requirejs",
+				"requirejs-text": "../../requirejs-text",
+				"requirejs-dplugins": "../../requirejs-dplugins",
+				"requirejs-domready": "../../requirejs-domready"
+			},
+			waitSeconds: 15
+		});
+	</script>
+
+	<script type="text/javascript">
+		require([
+			"delite/register",
+			"deliteful/list/List",
+			"dstore/Memory",
+			"deliteful/ViewStack",
+			"deliteful/LinearLayout",
+			"deliteful/Button",
+			"deliteful/SidePane",
+			"deliteful/ScrollableContainer",
+			"deliteful/ResponsiveColumns",
+			"delite/css!deliteful/ViewStack/transitions/cover.css",
+			"delite/css!deliteful/ViewStack/transitions/coverv.css",
+			"delite/css!deliteful/ViewStack/transitions/fade.css",
+			"delite/css!deliteful/ViewStack/transitions/flip.css",
+			"delite/css!deliteful/ViewStack/transitions/slidev.css",
+			"delite/css!deliteful/ViewStack/transitions/reveal.css",
+			"delite/css!deliteful/ViewStack/transitions/revealv.css",
+			"delite/theme!delite/themes/{{theme}}/global.css",	// page level CSS
+			"requirejs-domready/domReady!"
+		], function (register) {
+			register.parse();
+			// I should not have to call vs.show here, setting selectedChildId="ccc" should do it
+			left.show().then(function () {
+				var l1 = document.getElementById("list1");
+				l1.onclick = function (evt) { //MouseEvent
+							//var label = evt.target.innerText || evt.target.textContent || "";
+							var vsTemp = document.getElementById("vs");
+							var rev = document.getElementById("rev");
+							var transSelect1 = document.getElementById("transSelect1");
+							vsTemp.show(evt.target.getAttribute("showid"),
+									{transition: transSelect1.value, reverse: rev.checked});
+				};
+			});
+			vs.show("ddd").then(function () {
+				var l2 = document.getElementById("list2");
+				l2.onclick =
+						function (evt) { //MouseEvent
+							var vsTemp = document.getElementById("vs");
+							var rev = document.getElementById("rev");
+							var transSelect1 = document.getElementById("transSelect1");
+							vsTemp.show(evt.target.getAttribute("showid"),
+									{transition: transSelect1.value, reverse: rev.checked})
+						};
+				// It would be nice to make it visible inside here, but it is not working right because the ViewStack
+				// and the SidePane are making their contents visible even though the outerDiv is hidden.
+				document.getElementById("outerDiv").style.visibility = "visible";
+				// can not do display = "block" inside the .then because it will not show if it is display none
+				//document.getElementById("outerDiv").style.display = "block";
+			});
+			// the right list sets up the onclick for each li
+			right.show().then(function () {
+
+			});
+			// It would be nice to wait to set display block, but if it is display none on the calls to show above,
+			// it will not show do the show, or call .then
+			document.getElementById("outerDiv").style.display = "block";
+			//	document.getElementById("outerDiv").style.visibility = "visible";
+			//	outerDiv.style.display = "";
+		});
+	</script>
+
+</head>
+<body style="width:100%; height: 100%">
+<div id="outerDiv" style="visibility:hidden; display:none">
+	<d-linear-layout class="width100 height100 page">
+		<div id="header" class=" width100 pageHeader titleStyle">Responsize Columns Test App - no dapp</div>
+		<d-responsive-columns id="rc" class="fill page" style="width: 100%; height: 100%"
+							  breakpoints="{'phone': '500px', 'tablet': '900px', 'desktop': '99999px'}">
+			<div style="background-color: #bce8f1;" layout="{'phone': 'hidden', 'tablet': '20%', 'desktop': '20%'}">
+				<d-side-pane id="left" style="width:100%; height: 100%; position: relative;">
+					<div>
+						<ul id="list1">
+							<li showid="aaa">Show AAA</li>
+							<li showid="bbb">Show BBB</li>
+							<li showid="ccc">Show CCC</li>
+							<li showid="ddd">Show DDD</li>
+						</ul>
+						<input id="rev" type="checkbox">Reverse transition
+						<br>Transition Type:
+						<select id="transSelect1">
+							<option value="slide">Slide</option>
+							<option value="slidev">SlideV</option>
+							<option value="reveal">Reveal</option>
+							<option value="revealv">RevealV</option>
+							<option value="flip">Flip</option>
+							<option value="fade">Fade</option>
+							<option value="cover">Cover</option>
+							<option value="coverv">CoverV</option>
+						</select>
+					</div>
+				</d-side-pane>
+			</div>
+			<div class="fill" style="background-color: #46b8da;"
+				 layout="{'phone': '100%', 'tablet': 'fill', 'desktop': '60%'}">
+				<d-view-stack id="vs" style="width:100%; height: 600px;" selectedChildId="ccc">
+					<div style="background-color: honeydew; " id="aaa">
+						<h1>AAA</h1>
+					</div>
+					<div style="background-color: whitesmoke;" id="bbb">
+						<d-scrollable-container class="fill" style="width:100%; height: 100%;">
+							<h1>BBB</h1>
+							<ul id="list2">
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+								<li showid="aaa">AAA</li>
+								<li showid="bbb">BBB</li>
+								<li showid="ccc">CCC</li>
+								<li showid="ddd">DDD</li>
+							</ul>
+						</d-scrollable-container>
+					</div>
+					<div style="background-color: powderblue;" id="ccc">
+						<h1>CCC</h1>
+					</div>
+					<div style="background-color: oldlace;" id="ddd">
+						<h1>DDD</h1>
+						Notes/Problems:
+						<br> 1) The initial display does not show the selectedChildId="ccc" it is showing DDD because I
+							called vs.show("ddd"), but I should not have to do that.
+						<br> 2) There should be an easy way to have this take up the entire page, but I have had no luck with
+							that.
+						<br> 3) It should be easier to hide the page until it is ready to be shown, there are problems with that
+								because SidePane and ViewStack set visibility = "visible" even when the parent is hidden
+								which probably makes sense, but .show does not get called at all if display is none...
+						<br> 4) There is also a problem when selecting DDD and using reveal or revealV, it does not complete
+								the transition, not sure why (on Chrome).
+					</div>
+				</d-view-stack>
+			</div>
+			<div style="background-color: #007fea;" layout="{'phone': 'hidden', 'tablet': 'hidden', 'desktop': '20%'}">
+				<d-side-pane id="right" style="width:100%; height: 100%; position: relative;">
+					<div>
+						<ul id="list3">
+							<li onclick="vs.show('aaa',{transition:transSelect2.value, reverse:rev2.checked})">
+								Show AAA
+							</li>
+							<li onclick="vs.show('bbb',{transition:transSelect2.value, reverse:rev2.checked})">
+								Show BBB
+							</li>
+							<li onclick="vs.show('ccc',{transition:transSelect2.value, reverse:rev2.checked})">
+								Show CCC
+							</li>
+							<li onclick="vs.show('ddd',{transition:transSelect2.value, reverse:rev2.checked})">
+								Show DDD
+							</li>
+						</ul>
+						<input id="rev2" type="checkbox">Reverse transition
+						<br>Transition Type:
+						<select id="transSelect2">
+							<option value="slide">Slide</option>
+							<option value="slidev">Slidev</option>
+							<option value="reveal">Reveal</option>
+							<option value="revealv">Revealv</option>
+							<option value="flip">Flip</option>
+							<option value="fade">Fade</option>
+							<option value="cover">Cover</option>
+							<option value="coverv">Coverv</option>
+						</select>
+					</div>
+				</d-side-pane>
+			</div>
+		</d-responsive-columns>
+		<div id="footer" class=" width100 pageFooter titleStyle">Footer</div>
+	</d-linear-layout>
+</div>
+</body>
+</html>

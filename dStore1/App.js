@@ -1,6 +1,6 @@
 // jshint unused:false, undef:false, quotmark:false
-require(["dojo/_base/window", "dapp/Application", "dojo/json", "requirejs-text/text!./app.json", "dojo/sniff"],
-	function (win, Application, json, config, has) {
+require(["dojo/_base/window", "dapp/Application", "requirejs-text/text!./app.json"],
+	function (win, Application, config) {
 		window.dstore1App = {};
 		window.dstore1App.list1Data = {
 			identifier: "id",
@@ -19,8 +19,6 @@ require(["dojo/_base/window", "dapp/Application", "dojo/json", "requirejs-text/t
 			window.dstore1App.list2Data.items.push({label: "Selection " + i, id: i});
 		}
 
-		has.add("requirejs", window.requirejs);
-		/* jshint nonew: false */
 		var jsonData = config;
 		jsonData = jsonData.replace(/\/\*.*?\*\//g, "");
 		jsonData = jsonData.replace(/\/\/.*/g, "");

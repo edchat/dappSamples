@@ -15,8 +15,10 @@ requirejs.config({
 	//	"jquery.mobile": 'https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min',
 	//	"jquery.mobile.css": "http://code.jquery.com/mobile/1.4.3/"
 		"jquery": "../../jquery/jquery",
-		"jquery.mobile": "../../jquery-mobile/js/jquery.mobile-1.4.2",
-		"jquery.mobile.css": "http://code.jquery.com/mobile/1.4.3/"
+		"jquery.mobile": "https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min",
+		//"jquery.mobile": "../../jquery-mobile/js/jquery.mobile-1.4.2",
+		//"jquery.mobile.css": "http://code.jquery.com/mobile/1.4.3/"
+		"jquery.mobile.css": "http://code.jquery.com/mobile/1.4.4/"
 	},
 	shim: {
 	//	"jqm": ["jquery"]

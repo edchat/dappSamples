@@ -1,13 +1,6 @@
 // jshint unused:false, undef:false, quotmark:false
-require(["dapp/Application", //"dojo/json",
-		"requirejs-text/text!./config.json",
-		/*"requirejs-text/text!./dapp/samples/mobileApp/config.json",*/
-		"dojo/sniff"
-	],
+require(["dapp/Application", "requirejs-text/text!./config.json"],
 	function (Application, /*json,*/ config, has) {
-		/* jshint nonew: false */
-		has.add("requirejs", window.requirejs);
-
 		// remove single line comments from the config json
 		var jsonData = config;
 		jsonData = jsonData.replace(/\/\*.*?\*\//g, "");
