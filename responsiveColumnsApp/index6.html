@@ -94,7 +94,8 @@
 							reverse: document.getElementById("rev").checked});
 			};
 			// I should not have to call vs.show here, setting selectedChild="ccc" should do it
-			vs.show("ddd", {transition: "none"}).then(function () {
+			//vs.show("ddd", {transition: "none"}).then(function () {
+			vs.show("ddd").then(function () { // dont need transition: none ViewStack changed to check hidden parent
 				document.getElementById("outerDiv").style.display = "block";
 				document.getElementById("outerDiv").style.visibility = "visible";
 				document.getElementById("list2").onclick =
