@@ -27,6 +27,7 @@
 		"delite/css!deliteful/ViewStack/transitions/slidev.css",
 		"delite/css!deliteful/ViewStack/transitions/reveal.css",
 		"delite/css!deliteful/ViewStack/transitions/revealv.css",
+		"delite/theme!delite/themes/defaultapp.css",	// page level CSS
 		"delite/theme!delite/themes/{{theme}}/global.css"	// page level CSS
 	],
 
@@ -43,14 +44,26 @@
 	},
 
 	"alwaysUseDefaultView" : true, // ignore any url hash when starting the app
-	"defaultView": "left1+ccc+right1",
+	"defaultView": "header1+left1+ccc+right1",
 
 	"views": {
+		"header1": {
+			"constraint": "header",
+			"parentSelector": "#header",
+			"controller" : "responsiveColumnsApp/header1.js",
+			"template": "responsiveColumnsApp/header1.html"
+		},
 		"left1": {
 			"constraint": "left",
 			"parentSelector": "#left",
 			"controller" : "responsiveColumnsApp/left1.js",
 			"template": "responsiveColumnsApp/left1.html"
+		},
+		"spleft1": {
+			"constraint": "spleft",
+			"parentSelector": "#spleft",
+			"controller" : "responsiveColumnsApp/spleft1.js",
+			"template": "responsiveColumnsApp/spleft1.html"
 		},
 		"aaa": {
 			//"constraint": "vs",
@@ -75,6 +88,12 @@
 			"parentSelector": "#vs",
 			"controller" : "responsiveColumnsApp/ddd.js",
 			"template": "responsiveColumnsApp/ddd.html"
+		},
+		"spright1": {
+			"constraint": "spright",
+			"parentSelector": "#spright",
+			"controller" : "responsiveColumnsApp/spright1.js",
+			"template": "responsiveColumnsApp/spright1.html"
 		},
 		"right1": {
 			"constraint": "right",

@@ -1,0 +1,34 @@
+<template class="width100 height100" style="position: absolute; background-color: rosybrown;">
+	<d-linear-layout class="page width100 height100">
+		<!-- Header -->
+		<d-linear-layout vertical="false" class="pageHeader">
+			<div id="btnHideLeft" class="mblDomButtonGrayKnob mblDomButton" style="border: 1px solid red;"><div><div><div></div></div></div></div>
+			<div class="fill titleStyle"><br></div>
+		</d-linear-layout>
+		<div id="spleftdiv" class="fill"> <!-- move right content here when open -->
+			<div id="spleftdiv">
+				<ul id="spleftlist1">
+					<li showid="aaa">Show AAA</li>
+					<li showid="bbb">Show BBB</li>
+					<li showid="ccc">Show CCC</li>
+					<li showid="ddd">Show DDD</li>
+				</ul>
+				<input id="sprev" type="checkbox">Reverse transition
+				<br>Transition Type:
+				<select id="sptransSelect1">
+					<option value="slide">Slide</option>
+					<option value="slidev">SlideV</option>
+					<option value="reveal">Reveal</option>
+					<option value="revealv">RevealV</option>
+					<option value="flip">Flip</option>
+					<option value="fade">Fade</option>
+					<option value="cover">Cover</option>
+					<option value="coverv">CoverV</option>
+				</select>
+			</div>
+		</div>
+		<d-linear-layout vertical="false" class="pageFooter">
+			<div class="fill titleStyle"><br></div>
+		</d-linear-layout>
+	</d-linear-layout>
+</template>

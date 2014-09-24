@@ -1,0 +1,33 @@
+<template class="width100 height100" style="position: absolute; background-color: coral;">
+	<d-linear-layout class="page width100 height100">
+		<!-- Header -->
+		<d-linear-layout vertical="false" class="pageHeader">
+			<div class="fill titleStyle"><br></div>
+			<div id="btnHideRight" class="mblDomButtonGrayKnob mblDomButton" style="border: 1px solid red;"><div><div><div></div></div></div></div>
+		</d-linear-layout>
+		<div id="sprightdiv" class="fill"> <!-- move right content here when open -->
+			<!-- comment out this section to move the content from rightdiv -->
+			<ul>
+				<li on-click="responsiveColumnsApp.showOrHideViews('aaa',{transition:transSelect.value, reverse:rev2.checked})">AAA</li>
+				<li on-click="vs.show('bbb',{transition:transSelect.value, reverse:rev2.checked})">BBB</li>
+				<li on-click="vs.show('ccc',{transition:transSelect.value, reverse:rev2.checked})">CCC</li>
+				<li on-click="vs.show('ddd',{transition:transSelect.value, reverse:rev2.checked})">DDD</li>
+			</ul>
+			<input id="rev2" type="checkbox">Reverse transition
+			<br>Transition Type:
+			<select id="transSelect">
+				<option value="slide">Slide</option>
+				<option value="slidev">SlideV</option>
+				<option value="reveal">Reveal</option>
+				<option value="revealv">RevealV</option>
+				<option value="flip">Flip</option>
+				<option value="fade">Fade</option>
+				<option value="cover">Cover</option>
+				<option value="coverv">CoverV</option>
+			</select>
+		</div>
+		<d-linear-layout vertical="false" class="pageFooter">
+			<div class="fill titleStyle"><br></div>
+		</d-linear-layout>
+	</d-linear-layout>
+</template>

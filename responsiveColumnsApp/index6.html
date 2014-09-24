@@ -19,6 +19,9 @@
 			font-weight: bold;
 		}
 
+		.hideClass {
+			display: none;
+		}
 		.blue {
 			background-color: #00AEEF;
 		}
@@ -38,7 +41,6 @@
 		.orange {
 			background-color: #FAA61A;
 		}
-
 	</style>
 
 	<!-- for requireJS -->
@@ -86,27 +88,26 @@
 			"requirejs-domready/domReady!"
 		], function (register) {
 			register.parse();
-			// I should not have to call vs.show here, setting selectedChildId="ccc" should do it
-			var left = document.getElementById("left");
-			left.animate = false;
-			left.show("leftdiv").then(function () {
-			});
-			var right = document.getElementById("right");
-			right.animate = false;
-			right.show("rightdiv").then(function () {
-			});
-
 			document.getElementById("list1").onclick = function (evt) { //MouseEvent
 				document.getElementById("vs").show(evt.target.getAttribute("showid"),
 						{transition: document.getElementById("transSelect1").value,
 							reverse: document.getElementById("rev").checked});
 			};
+			// I should not have to call vs.show here, setting selectedChild="ccc" should do it
 			vs.show("ddd", {transition: "none"}).then(function () {
+				document.getElementById("outerDiv").style.display = "block";
+				document.getElementById("outerDiv").style.visibility = "visible";
 				document.getElementById("list2").onclick =
 						function (evt) { //MouseEvent
 							document.getElementById("vs").show(evt.target.getAttribute("showid"),
 									{transition: document.getElementById("transSelect1").value,
 										reverse: document.getElementById("rev").checked})
+						};
+				document.getElementById("splist2").onclick =
+						function (evt) { //MouseEvent
+							document.getElementById("vs").show(evt.target.getAttribute("showid"),
+									{transition: document.getElementById("sptransSelect1").value,
+										reverse: document.getElementById("sprev").checked})
 						};
 				// It would be nice to make it visible inside here, but it is not working right because the ViewStack
 				// and the SidePane are making their contents visible even though the outerDiv is hidden.
@@ -114,14 +115,47 @@
 				// can not do display = "block" inside the .then because it will not show if it is display none
 				//document.getElementById("outerDiv").style.display = "block";
 			});
-			// try to show the right side pane when the header menu is clicked.
-			// there is a problem since the side-panes parent is hidden by the ResponsiveColumn.
+			// Handle show and hide right and left sidepanes here
+			document.getElementById("btnShowRight").onclick = function (evt) { //MouseEvent
+				var rightdiv = document.getElementById("rightdiv");
+				var sprightdiv = document.getElementById("sprightdiv");
+				sprightdiv.appendChild(rightdiv);
+				var rightPane = document.getElementById("spright");
+				rightPane.show();
+			};
+			document.getElementById("btnHideRight").onclick = function (evt) { //MouseEvent
+				var rightPane = document.getElementById("spright");
+				rightPane.hide().then(function () {
+					var rightdiv = document.getElementById("rightdiv");
+					var right = document.getElementById("right");
+					right.appendChild(rightdiv);
+				});
+			};
+			document.getElementById("btnShowLeft").onclick = function (evt) { //MouseEvent
+				var btnShowLeft = document.getElementById("btnShowLeft");
+				btnShowLeft.style.display = "none";
+				var leftdiv = document.getElementById("leftdiv");
+				var spleftdiv = document.getElementById("spleftdiv");
+				spleftdiv.appendChild(leftdiv);
+				var leftPane = document.getElementById("spleft");
+				leftPane.show();
+			};
+			document.getElementById("btnHideLeft").onclick = function (evt) { //MouseEvent
+				var leftPane = document.getElementById("spleft");
+				leftPane.hide().then(function () {
+					var btnShowLeft = document.getElementById("btnShowLeft");
+					btnShowLeft.style.display = "block";
+					var leftdiv = document.getElementById("leftdiv");
+					var left = document.getElementById("left");
+					left.appendChild(leftdiv);
+				});
+			};
+		//	document.getElementById("outerDiv").style.display = "block";
+		//	document.getElementById("outerDiv").style.visibility = "visible";
 
 			//	});
 			// It would be nice to wait to set display block, but if it is display none on the calls to show above,
 			// it will not show do the show, or call .then
-			document.getElementById("outerDiv").style.display = "block";
-			document.getElementById("outerDiv").style.visibility = "visible";
 			//	outerDiv.style.display = "";
 			//
 		});
@@ -129,12 +163,29 @@
 
 </head>
 <body style="overflow: hidden; margin: 0px">
+<d-side-pane id="spleft" class="red hideClass" style="position: absolute; width: 100%; height: 100%;">
+	<d-linear-layout class="page width100 height100">
+		<!-- Header -->
+		<d-linear-layout vertical="false" class="pageHeader">
+			<div id="btnHideLeft" class="mblDomButtonGrayKnob mblDomButton" style="border: 1px solid red;"><div><div><div></div></div></div></div>
+			<div class="fill titleStyle"><br></div>
+		</d-linear-layout>
+		<div id="spleftdiv" class="fill"> <!-- move right content here when open -->
+		</div>
+		<d-linear-layout vertical="false" class="pageFooter">
+			<div class="fill titleStyle"><br></div>
+		</d-linear-layout>
+	</d-linear-layout>
+</d-side-pane>
 <div id="outerDiv" style="visibility:hidden; display:none; position: absolute; width: 100%; height: 100%">
+	<!-- Left SidePane -->
 	<!-- Main application -->
 	<d-linear-layout class="page width100 height100">
 		<!-- Header -->
 		<d-linear-layout vertical="false" class="pageHeader">
-			<div class="fill titleStyle">Deliteful Mobile App</div>
+			<div id="btnShowLeft" class="hideTablet mblDomButtonGrayKnob mblDomButton" style="border: 1px solid red;"><div><div><div></div></div></div></div>
+			<div class="fill titleStyle">Responsive Column App</div>
+			<div id="btnShowRight" class="hideDesktop mblDomButtonGrayKnob mblDomButton" style="border: 1px solid red;"><div><div><div></div></div></div></div>
 		</d-linear-layout>
 
 		<!-- Main Content this will become the ResponsiveColumn
@@ -143,10 +194,10 @@
 		<d-responsive-columns id="rc" style="position: absolute; width: 100%; height: 100%"
 							  breakpoints="{'phone': '500px', 'tablet': '900px', 'desktop': '99999px'}">
 
-			<div layout="{'phone': 'hidden', 'tablet': '20%', 'desktop': '20%'}">
+			<div layout="{'phone': 'hidden', 'tablet': '182px', 'desktop': '20%'}">
 				<d-linear-layout style="position: absolute; width: 100%; height: 100%;">
 					<div class="fill red">
-						<d-side-pane id="left" class="red" style="position: absolute; width: 100%; height: 100%;">
+						<div id="left" class="red" style="position: absolute; width: 100%; height: 100%;">
 							<div id="leftdiv">
 								<ul id="list1">
 									<li showid="aaa">Show AAA</li>
@@ -167,7 +218,7 @@
 									<option value="coverv">CoverV</option>
 								</select>
 							</div>
-						</d-side-pane>
+						</div>
 					</div>
 				</d-linear-layout>
 			</div>
@@ -224,36 +275,36 @@
 				</d-linear-layout>
 			</div>
 			<div class="green" layout="{'phone': 'hidden', 'tablet': 'hidden', 'desktop': '20%'}">
-				<d-side-pane id="right" class="green" style="position: absolute; width: 100%; height: 100%;">
-					<div id="rightdiv">
-						<ul id="list3">
-							<li onclick="vs.show('aaa',{transition:transSelect2.value, reverse:rev2.checked})">
-								Show AAA
-							</li>
-							<li onclick="vs.show('bbb',{transition:transSelect2.value, reverse:rev2.checked})">
-								Show BBB
-							</li>
-							<li onclick="vs.show('ccc',{transition:transSelect2.value, reverse:rev2.checked})">
-								Show CCC
-							</li>
-							<li onclick="vs.show('ddd',{transition:transSelect2.value, reverse:rev2.checked})">
-								Show DDD
-							</li>
-						</ul>
-						<input id="rev2" type="checkbox">Reverse transition
-						<br>Transition Type:
-						<select id="transSelect2">
-							<option value="slide">Slide</option>
-							<option value="slidev">Slidev</option>
-							<option value="reveal">Reveal</option>
-							<option value="revealv">Revealv</option>
-							<option value="flip">Flip</option>
-							<option value="fade">Fade</option>
-							<option value="cover">Cover</option>
-							<option value="coverv">Coverv</option>
-						</select>
-					</div>
-				</d-side-pane>
+				<div id="right" class="green" style="position: absolute; width: 100%; height: 100%;">
+						<div id="rightdiv">
+							<ul id="list3">
+								<li onclick="vs.show('aaa',{transition:transSelect2.value, reverse:rev2.checked})">
+									Show AAA
+								</li>
+								<li onclick="vs.show('bbb',{transition:transSelect2.value, reverse:rev2.checked})">
+									Show BBB
+								</li>
+								<li onclick="vs.show('ccc',{transition:transSelect2.value, reverse:rev2.checked})">
+									Show CCC
+								</li>
+								<li onclick="vs.show('ddd',{transition:transSelect2.value, reverse:rev2.checked})">
+									Show DDD
+								</li>
+							</ul>
+							<input id="rev2" type="checkbox">Reverse transition
+							<br>Transition Type:
+							<select id="transSelect2">
+								<option value="slide">Slide</option>
+								<option value="slidev">Slidev</option>
+								<option value="reveal">Reveal</option>
+								<option value="revealv">Revealv</option>
+								<option value="flip">Flip</option>
+								<option value="fade">Fade</option>
+								<option value="cover">Cover</option>
+								<option value="coverv">Coverv</option>
+							</select>
+						</div>
+				</div>
 			</div>
 		</d-responsive-columns>
 		</div>
@@ -263,5 +314,19 @@
 		</d-linear-layout>
 	</d-linear-layout>
 </div>
+<d-side-pane id="spright" position="end" class="green hideClass" style="position: absolute; width: 20%; height: 100%; min-width: 182px;">
+	<d-linear-layout class="page width100 height100">
+		<!-- Header -->
+		<d-linear-layout vertical="false" class="pageHeader">
+			<div class="fill titleStyle"><br></div>
+			<div id="btnHideRight" class="mblDomButtonGrayKnob mblDomButton" style="border: 1px solid red;"><div><div><div></div></div></div></div>
+		</d-linear-layout>
+		<div id="sprightdiv" class="fill"> <!-- move right content here when open -->
+		</div>
+		<d-linear-layout vertical="false" class="pageFooter">
+			<div class="fill titleStyle"><br></div>
+		</d-linear-layout>
+	</d-linear-layout>
+</d-side-pane>
 </body>
 </html>
