@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./css/samples.css">
+		<script src="../../requirejs/require.js"></script>
+		<script>
+			require.config({
+				paths: {
+					"dapp": "../../dapp",
+					"dcl": "../../dcl",
+					"dojo": "../../dojo",
+					"dpointer": "../../dpointer",
+					"decor": "../../decor",
+					"delite": "../../delite",
+					"deliteful": "../../deliteful",
+					"dstore": "../../dstore",
+					"liaison": "../../liaison",
+					"requirejs": "../../requirejs",
+					"requirejs-text": "../../requirejs-text",
+					"requirejs-dplugins": "../../requirejs-dplugins",
+					"requirejs-domready": "../../requirejs-domready"
+				},
+				waitSeconds: 15
+			});
+		</script>
+		<script type="text/javascript">
+			currentValue = {
+					Street: "123 Valley Rd",
+					City: "Katonah",
+					State: "NY",
+					Zip: "10536"
+			};
+			currentValue2 = {
+				Street: "17 Skyline Dr",
+				City: "Hawthorne",
+				State: "NY",
+				Zip: "10532"
+			};
+			nested1 = {
+				Type: "Home",
+				Address: {
+					Street: "123 Valley Rd",
+					City: "Katonah",
+					State: "NY",
+					Zip: "10536"
+				},
+				Telephone: {
+					AreaCode: "123",
+					Landline: {
+						Number: "456-7890",
+						Extension: "42"
+					},
+					Cell: {
+						Number: "765-4321"
+					}
+				}
+			};
+			nested2 = {
+				Type: "Office",
+				Address: {
+					Street: "17 Skyline Dr",
+					City: "Hawthorne",
+					State: "NY",
+					Zip: "10532"
+				},
+				Telephone: {
+					AreaCode: "098",
+					Landline: {
+						Number: "765-4321",
+						Extension: "24"
+					},
+					Cell: {
+						Number: "123-4567"
+					}
+				}
+			};
+
+			require([
+				"delite/register",
+			//	"deliteful/Form",
+				"dcl/dcl",
+				"liaison/wrapper",
+				"liaison/delite/createRenderer",
+				"liaison/delite/widgets/Widget"
+			], function (register, /*form,*/ dcl, wrapper, createRenderer, Widget) {
+				function startup () {
+					register("d-form", [HTMLElement, Widget], wrapper.wrap({
+						value: null,
+						current: null,
+						buildRendering: function () {
+							console.log("in Form "+this.id+ ":buildRendering");
+						},
+						preCreate: function () {
+							console.log("in Form "+this.id+ ":precreate");
+						},
+						postCreate: function () {
+							console.log("in Form "+this.id+ ":postcreate");
+						},
+
+						_setValueAttr: function (val) {
+							this._set("value", val);
+							console.log("in Form "+this.id+ ":_setCurrentvalueAttr with val=",val);
+							this.current = {};
+							dcl.mix(this.current, this.value);
+							var formTemplate = this.querySelector("template");
+							formTemplate.bind("bind", this.value);
+						},
+						refreshRendering: function (oldValues) {
+							console.log("in Form "+this.id+ ":refreshRendering");
+						},
+						reset: function () { // reset values
+							console.log("in Form "+this.id+ ":reset");
+							dcl.mix(this.value, this.current);
+						},
+
+						save: function () { // reset values
+							console.log("in Form "+this.id+ ":save");
+							this.current = {};
+							dcl.mix(this.current, this.value);
+						},
+
+						baseClass: "d-form"
+					}));
+
+					register.parse();
+				}
+
+				document.body ? startup() : window.addEventListener("DOMContentLoaded", startup);
+			});
+		</script>
+	</head>
+	<body>
+	<!--
+		<liaison-sample-select></liaison-sample-select>
+-->
+		<span> Form1 </span>
+		<d-form id="form1" name="form1" value="currentValue">
+			<template>
+				<div><span class="cell">Street:</span> <input type="text" name="Street" value="{{Street}}"></div>
+				<div><span class="cell">City:</span> <input type="text" name="City" value="{{City}}"></div>
+				<div><span class="cell">State:</span> <input type="text" name="State" value="{{State}}"></div>
+				<div><span class="cell">Zipcode:</span> <input type="text" name="Zip" value="{{Zip}}"></div>
+			</template>
+		</d-form>
+	<input type="button" value="Reset" onclick="form1.reset();">
+	<input type="button" value="Save" onclick="form1.save();">
+	<br><span> Form2 liaison </span>
+	<d-form id="form2" name="form2" value="currentValue2">
+		<template>
+			<div><span class="cell">Street:</span> <input type="text" value="{{Street}}"></div>
+			<div><span class="cell">City:</span> <input type="text" value="{{City}}"></div>
+			<div><span class="cell">State:</span> <input type="text" value="{{State}}"></div>
+			<div><span class="cell">Zipcode:</span> <input type="text" value="{{Zip}}"></div>
+		</template>
+	</d-form>
+
+	<input type="button" value="Ship To" onclick="form1.value = currentValue; form2.value = currentValue">
+	<input type="button" value="Bill To" onclick="form1.value = currentValue2; form2.value = currentValue2">
+	<input type="button" value="Reset" onclick="form1.reset();">
+	<input type="button" value="Save" onclick="form1.save();">
+
+	<br><span> Form3 liaison Nested data </span>
+	<div>
+		<d-form id="form3" name="form3" value="nested1">
+			<template bind="{{current}}">
+				<div><span class="cell">Type:</span> <input type="text" value="{{Type}}"></div>
+				<template bind="{{Address}}">
+					<div><span class="cell">Street:</span> <input type="text" value="{{Street}}"></div>
+					<div><span class="cell">City:</span> <input type="text" value="{{City}}"></div>
+					<div><span class="cell">State:</span> <input type="text" value="{{State}}"></div>
+					<div><span class="cell">Zipcode:</span> <input type="text" value="{{Zip}}"></div>
+				</template>
+				<template bind="{{Telephone}}">
+					<div><span class="cell">Area code:</span> <input type="text" value="{{AreaCode}}"></div>
+					<div><span class="cell">Landline Number:</span> <input type="text" value="{{Landline.Number}}"></div>
+					<div><span class="cell">Extension:</span> <input type="text" value="{{Landline.Extension}}"></div>
+					<div><span class="cell">Cell Number:</span> <input type="text" value="{{Cell.Number}}"></div>
+				</template>
+			</template>
+
+<!--
+			<template>
+				<div><span class="cell">Street:</span> <input type="text" value="{{Address.Street}}"></div>
+				<div><span class="cell">City:</span> <input type="text" value="{{Address.City}}"></div>
+				<div><span class="cell">State:</span> <input type="text" value="{{Address.State}}"></div>
+				<div><span class="cell">Zipcode:</span> <input type="text" value="{{Address.Zip}}"></div>
+				<div><span class="cell">Area code:</span> <input type="text" value="{{Telephone.AreaCode}}"></div>
+				<div><span class="cell">Landline Number:</span> <input type="text" value="{{Telephone.Landline.Number}}"></div>
+				<div><span class="cell">Extension:</span> <input type="text" value="{{Telephone.Landline.Extension}}"></div>
+				<div><span class="cell">Cell Number:</span> <input type="text" value="{{Telephone.Cell.Number}}"></div>
+			</template>
+
+ -->
+	</d-form>
+
+		<input type="button" value="Home" onclick="form3.value = nested1;">
+		<input type="button" value="Office" onclick="form3.value = nested2;">
+		<input type="button" value="Reset" onclick="form3.reset();">
+		<input type="button" value="Save" onclick="form3.save();">
+	</div>
+
+	<script type="text/x-template" id="select-template">
+		<div>
+			<div><span class="cell">Order#:</span> <input type="text" value="{{Serial}}"></div>
+			<div><span class="cell">Last name:</span> <input type="text" value="{{Last}}"></div>
+			<div><span class="cell">Email:</span> <input type="text" value="{{Email}}"></div>
+			<div>
+				<input type="button" value="Ship To" on-click="{{select}}" data-item="ShipTo">
+				<input type="button" value="Bill To" on-click="{{select}}" data-item="BillTo">
+			</div>
+			<div><span class="cell">Selected Address:</span> <input type="text" value="{{Selected}}"></div>
+			<template bind="{{current}}">
+				<div><span class="cell">Type:</span> <input type="text" value="{{Type}}"></div>
+				<template bind="{{Address}}">
+					<div><span class="cell">Street:</span> <input type="text" value="{{Street}}"></div>
+					<div><span class="cell">City:</span> <input type="text" value="{{City}}"></div>
+					<div><span class="cell">State:</span> <input type="text" value="{{State}}"></div>
+					<div><span class="cell">Zipcode:</span> <input type="text" value="{{Zip}}"></div>
+				</template>
+				<template bind="{{Telephone}}">
+					<div><span class="cell">Area code:</span> <input type="text" value="{{AreaCode}}"></div>
+					<div><span class="cell">Landline Number:</span> <input type="text" value="{{Landline.Number}}"></div>
+					<div><span class="cell">Extension:</span> <input type="text" value="{{Landline.Extension}}"></div>
+					<div><span class="cell">Cell Number:</span> <input type="text" value="{{Cell.Number}}"></div>
+				</template>
+			</template>
+		</div>
+	</script>
+
+<!--
+		<d-form id="form1" name="form1">
+			<div><span class="cell">Type:</span> <input type="text" value="{{Type}}"></div>
+			<div bind="{{Address}}">
+				<div><span class="cell">Street:</span> <input type="text" value="{{Street}}"></div>
+				<div><span class="cell">City:</span> <input type="text" value="{{City}}"></div>
+				<div><span class="cell">State:</span> <input type="text" value="{{State}}"></div>
+				<div><span class="cell">Zipcode:</span> <input type="text" value="{{Zip}}"></div>
+			</div>
+			<div bind="{{Telephone}}">
+				<div><span class="cell">Area code:</span> <input type="text" value="{{AreaCode}}"></div>
+				<div><span class="cell">Landline Number:</span> <input type="text" value="{{Landline.Number}}"></div>
+				<div><span class="cell">Extension:</span> <input type="text" value="{{Landline.Extension}}"></div>
+				<div><span class="cell">Cell Number:</span> <input type="text" value="{{Cell.Number}}"></div>
+			</div>
+		</d-form>
+-->
+	</body>
+</html>

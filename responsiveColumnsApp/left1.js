@@ -14,6 +14,18 @@ define([], function () {
 				//		reverse: document.getElementById("rev").checked
 				//	});
 			}.bind(this);
+			document.getElementById("makeTabletBut").onclick = function (evt) { //MouseEvent
+				var rc = this.ownerDocument.getElementById("rc");
+				rc.breakpoints = "{'phone': '200px', 'tablet': '99000px', 'desktop': '99999px'}";
+				rc.notifyCurrentValue("breakpoints");
+				console.log("set tablet size to 1301px");
+			}.bind(this);
+			document.getElementById("makePhoneBut").onclick = function (evt) { //MouseEvent
+				var rc = this.ownerDocument.getElementById("rc");
+				rc.breakpoints = "{'phone': '98000px', 'tablet': '99000px', 'desktop': '99999px'}";
+				rc.notifyCurrentValue("breakpoints");
+				console.log("set phone and tablet size to 1301px");
+			}.bind(this);
 		}
 	};
 });

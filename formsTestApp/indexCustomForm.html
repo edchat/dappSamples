@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./css/samples.css">
+<style type="text/css">
+	input:focus:invalid {
+		outline-offset: -2px;
+		outline-style: auto;
+		outline-width: 5px;
+		outline-color: rgb(212, 100, 100);
+	}
+
+	input:required:invalid, input:focus:invalid, textarea:required:invalid, textarea:focus:invalid {
+		box-shadow: 0 0 1.5px 1px rgb(212, 100, 100);
+		border: 2px inset rgb(212, 100, 100);
+		background-repeat: no-repeat;
+		background-image: url("./images/error.png");
+		background-position: right top;
+	}
+</style>
+<script src="../../requirejs/require.js"></script>
+<script>
+	require.config({
+		paths: {
+			"dapp": "../../dapp",
+			"dcl": "../../dcl",
+			"dojo": "../../dojo",
+			"dpointer": "../../dpointer",
+			"decor": "../../decor",
+			"delite": "../../delite",
+			"deliteful": "../../deliteful",
+			"dstore": "../../dstore",
+			"liaison": "../../liaison",
+			"requirejs": "../../requirejs",
+			"requirejs-text": "../../requirejs-text",
+			"requirejs-dplugins": "../../requirejs-dplugins",
+			"requirejs-domready": "../../requirejs-domready"
+		},
+		waitSeconds: 15
+	});
+</script>
+<script type="text/javascript">
+	data1 = {
+		Street: "123 Valley Rd",
+		City: "Katonah",
+		State: "NY",
+		Zip: "10536"
+	};
+	data2 = {
+		Street: "17 Skyline Dr",
+		City: "Hawthorne",
+		State: "NY",
+		Zip: "10532"
+	};
+	nested1 = {
+		Type: "Home",
+		Address: {
+			Street: "123 Valley Rd",
+			City: "Katonah",
+			State: "NY",
+			Zip: "10536"
+		},
+		Telephone: {
+			AreaCode: "123",
+			Landline: {
+				Number: "456-7890",
+				Extension: "42"
+			},
+			Cell: {
+				Number: "765-4321"
+			}
+		}
+	};
+	nested2 = {
+		Type: "Office",
+		Address: {
+			Street: "17 Skyline Dr",
+			City: "Hawthorne",
+			State: "NY",
+			Zip: "10532"
+		},
+		Telephone: {
+			AreaCode: "098",
+			Landline: {
+				Number: "765-4321",
+				Extension: "24"
+			},
+			Cell: {
+				Number: "123-4567"
+			}
+		}
+	};
+
+	require([
+		"delite/register",
+		"delite/Widget"
+	], function (register, Widget) {
+		function startup () {
+			register("custom-form", [HTMLElement, Widget], {
+				value: null,
+				original: null,
+				render: function () {
+					console.log("in Form " + this.id + ":render value", this.value);
+				},
+				preRender: function () {
+					console.log("in Form " + this.id + ":preRender value", this.value);
+				},
+				postRender: function () {
+					console.log("in Form " + this.id + ":postRender value", this.value);
+				},
+				refreshRendering: function (oldValues) {
+					console.log("in Form " + this.id + ":refreshRendering value", this.value);
+				},
+				_getValueForElem: function (name) {
+					if (name && this.value[name]) {
+						//console.log("in Form " + this.id + ":_getValueForElem returning value for elem.name=[" + name +
+						//		"] with value=[" + this.value[name] + "]");
+						return(this.value[name]);
+					} else { // check to see if there is a . in the elem.name
+						var parts = name.split(".");
+						var val = this.value;
+						for (var item in parts) {
+							if (val[parts[item]]) {
+								val = val[parts[item]];
+							} else {
+								console.warn("in Form " + this.id + ":_getValueForElem did not find value for elem.name=[" +
+										name + "] this.value =", this.value);
+								return null;
+							}
+						}
+						return val;
+					}
+				},
+				_getObjectToUpdate: function (val, parts) {
+					if (parts) {
+						var obj = val;
+						for (var item in parts) {
+							obj = obj[parts[item]];
+						}
+						return obj;
+					}
+					return null;
+				},
+
+				_setValueFromElem: function (val, elem) {
+					console.log("in Form " + this.id + ":_setValueFromElem");
+					if (elem.name && val[elem.name]) {
+						//console.log("in Form " + this.id + ":_setValueFromElem returning value for elem.name=[" +
+						//		elem.name + "] with value=[" + val[elem.name] + "]");
+						val[elem.name] = elem.value;
+						return;
+					} else { // check to see if there is a . in the elem.name
+						var parts = elem.name.split(".");
+						var lastPart = parts.pop();
+						var updatePart = this._getObjectToUpdate(val, parts);
+						if (updatePart[lastPart]) {
+							updatePart[lastPart] = elem.value;
+						} else {
+							console.warn("in Form " + this.id + ":_setValueFromElem did not find value for elem.name=[" +
+									elem.name + "] val =", val);
+						}
+					}
+				},
+				_getFormValue: function () {
+					console.log("in Form " + this.id + ":_getFormValue");
+					formElems = this.querySelectorAll('[name]'); // query the form value fields
+					for (var i = 0; i < formElems.length; i++) {
+						var elem = formElems[i];
+						if(!elem.checkValidity()){
+							console.warn("Warning invalid form value! Can not save");
+							elem.focus();
+							return this.value;
+						}
+					}
+					for (var i = 0; i < formElems.length; i++) {
+						var elem = formElems[i];
+						if (elem.name) {
+							this._setValueFromElem(this.value, elem);
+							//console.log("in Form " + this.id + ":_getFormValue setting value for elem.name=[" +
+							//		elem.name + "] with value=[" + elem.value + "]");
+						}
+					}
+					return this.value;
+				},
+
+				_setFormValue: function () {
+					console.log("in Form " + this.id + ":_setFormValue");
+					if (this.value) {
+						formElems = this.querySelectorAll('[name]'); // query the form value fields
+						for (var i = 0; i < formElems.length; i++) {
+							var elem = formElems[i];
+							if (elem.name) {
+								var val = this._getValueForElem(elem.name);
+								if (val) {
+									elem.value = val;
+									//console.log("in Form " + this.id + ":_setFormValue setting elem.value elem.name=[" +
+									//		elem.name + "] with value=[" + elem.value + "]");
+								}
+							}
+						}
+					}
+				},
+
+				// Called when the form value is set
+				_setValueAttr: function (val) {
+					this._set("value", val);
+					console.log("in Form " + this.id + ":_setValueAttr with val=", val);
+					this._setFormValue(); // set the values into the form fields from this.value
+				},
+				reset: function () { // reset values from this.value, since not live bound can reset from value
+					console.log("in Form " + this.id + ":reset, reset data to =", this.value);
+					this._setFormValue(); // reset the values in the form fields to this.value
+				},
+
+				save: function () { // save the form field values back into this.value
+					var t = this._getFormValue(); // updates this.value from the form fields
+				},
+
+				baseClass: "custom-form"
+			});
+
+			register.parse();
+		}
+
+		document.body ? startup() : window.addEventListener("DOMContentLoaded", startup);
+	});
+</script>
+</head>
+<body>
+	<br><span> Form1 and Form2 can be set from the same data object, but do not have live data binding.
+		Use liaison for live data binding.</span>
+	<br><span> Here we simulate binding by having Save update the data and set the value on the other form to its
+		current value, forcing it to update the form fields.</span>
+	<br><br><span> Form1 intially set from data1</span>
+	<custom-form id="form1" name="form1" value="data1">
+		<div><span class="cell">Street:</span> <input type="text" required name="Street"></div>
+		<div><span class="cell">City:</span> <input type="text" required name="City"></div>
+		<div><span class="cell">State:</span> <input type="text" required name="State"></div>
+		<div><span class="cell">Zipcode:</span> <input type="text" required name="Zip"></div>
+	</custom-form>
+	<input type="button" value="Set value to Data1" onclick="form1.value = data1;">
+	<input type="button" value="Set value to Data2" onclick="form1.value = data2;">
+	<input type="button" value="Reset" onclick="form1.reset();">
+	<input type="button" value="Save Form1 and update Form2" onclick="form1.save();form2.value = form2.value;">
+	<br><br><span> Form2 initially set form data2 </span>
+	<custom-form id="form2" name="form2" value="data2">
+		<div><span class="cell">Street:</span> <input type="text" name="Street" required></div>
+		<div><span class="cell">City:</span> <input type="text" name="City"required></div>
+		<div><span class="cell">State:</span> <input type="text" name="State" required></div>
+		<div><span class="cell">Zipcode:</span> <input type="text" name="Zip" required></div>
+	</custom-form>
+	<input type="button" value="Set value to Data1" onclick="form2.value = data1;">
+	<input type="button" value="Set value to Data2" onclick="form2.value = data2;">
+	<input type="button" value="Reset" onclick="form2.reset();">
+	<input type="button" value="Save Form2 and update Form1" onclick="form2.save();form1.value = form1.value;">
+
+	<br><br><span> Form3 - Nested data initially set from nested1</span>
+	<div>
+		<custom-form id="form3" name="form3" value="nested1">
+			<div><span class="cell">Street:</span> <input type="text" name="Address.Street"></div>
+			<div><span class="cell">City:</span> <input type="text" name="Address.City"></div>
+			<div><span class="cell">State:</span> <input type="text" name="Address.State"></div>
+			<div><span class="cell">Zipcode:</span> <input type="text" name="Address.Zip"></div>
+			<div><span class="cell">Area code:</span> <input type="text" name="Telephone.AreaCode"></div>
+			<div><span class="cell">Landline Number:</span> <input type="text" name="Telephone.Landline.Number"></div>
+			<div><span class="cell">Extension:</span> <input type="text" name="Telephone.Landline.Extension"></div>
+			<div><span class="cell">Cell Number:</span> <input type="text" name="Telephone.Cell.Number"></div>
+		</custom-form>
+
+		<input type="button" value="Set value to Nested1" onclick="form3.value = nested1;">
+		<input type="button" value="Set value to Nested2" onclick="form3.value = nested2;">
+		<input type="button" value="Reset" onclick="form3.reset();">
+		<input type="button" value="Save" onclick="form3.save();">
+	</div>
+</body>
+</html>

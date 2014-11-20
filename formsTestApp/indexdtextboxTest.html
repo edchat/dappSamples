@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./css/samples.css">
+<script src="../../requirejs/require.js"></script>
+<script>
+	require.config({
+		paths: {
+			"dapp": "../../dapp",
+			"dcl": "../../dcl",
+			"dojo": "../../dojo",
+			"dpointer": "../../dpointer",
+			"decor": "../../decor",
+			"delite": "../../delite",
+			"deliteful": "../../deliteful",
+			"dstore": "../../dstore",
+			"liaison": "../../liaison",
+			"requirejs": "../../requirejs",
+			"requirejs-text": "../../requirejs-text",
+			"requirejs-dplugins": "../../requirejs-dplugins",
+			"requirejs-domready": "../../requirejs-domready"
+		},
+		waitSeconds: 15
+	});
+</script>
+<script type="text/javascript">
+	nested1 = {
+		Type: "Home",
+		Email: "e@mail.com",
+		Password: "password",
+		Address: {
+			Street: "123 Valley Rd",
+			City: "Katonah",
+			State: "NY",
+			Zip: "10536"
+		},
+		Telephone: {
+			AreaCode: "123",
+			Landline: {
+				Number: "123-456-7890",
+				Extension: "42"
+			},
+			Cell: {
+				Number: "123-765-4321"
+			}
+		}
+	};
+	nested2 = {
+		Type: "Office",
+		Email: "o@mail.com",
+		Password: "password2",
+		Address: {
+			Street: "17 Skyline Dr",
+			City: "Hawthorne",
+			State: "NY",
+			Zip: "10532"
+		},
+		Telephone: {
+			AreaCode: "098",
+			Landline: {
+				Number: "098-765-4321",
+				Extension: "24"
+			},
+			Cell: {
+				Number: "123-123-4567"
+			}
+		}
+	};
+	var upperCaseFormat = function(value) {
+		var newValue = "";
+		newValue = value.toUpperCase();
+	    return newValue;
+	};
+	var lowerCaseFormat = function(value) {
+		var newValue = "";
+		newValue = value.toLowerCase();
+	    return newValue;
+	};
+
+	var toggleButton = function(node, attr, button) {
+		node[attr] = !node[attr];
+		button.value = "Toggle "+ attr + (node[attr] ? " off" : " on");
+	};
+
+	require([
+		"delite/register",
+		"deliteful/Textbox",
+		"delite/Widget"
+	], function (register, Textbox, Widget) {
+		function startup () {
+			register("custom-form", [HTMLElement, Widget], {
+				value: null,
+				original: null,
+				render: function () {
+					console.log("in Form " + this.id + ":render value", this.value);
+				},
+				preRender: function () {
+					console.log("in Form " + this.id + ":preRender value", this.value);
+				},
+				postRender: function () {
+					console.log("in Form " + this.id + ":postRender value", this.value);
+				},
+				refreshRendering: function (oldValues) {
+					console.log("in Form " + this.id + ":refreshRendering value", this.value);
+				},
+				_getValueForElem: function (name) {
+					if (name && this.value[name]) {
+						console.log("in Form " + this.id + ":_getValueForElem returning value for elem.name=[" + name +
+								"] with value=[" + this.value[name] + "]");
+						return(this.value[name]);
+					} else { // check to see if there is a . in the elem.name
+						var parts = name.split(".");
+						var val = this.value;
+						for (var item in parts) {
+							if (val[parts[item]]) {
+								val = val[parts[item]];
+							} else {
+								console.warn("in Form " + this.id + ":_getValueForElem did not find value for elem.name=[" +
+										name + "] this.value =", this.value);
+								return null;
+							}
+						}
+						return val;
+					}
+				},
+				_getObjectToUpdate: function (val, parts) {
+					if (parts) {
+						var obj = val;
+						for (var item in parts) {
+							obj = obj[parts[item]];
+						}
+						return obj;
+					}
+					return null;
+				},
+
+				_setValueFromElem: function (val, elem) {
+					console.log("in Form " + this.id + ":_setValueFromElem");
+					if (elem.name && val[elem.name]) {
+						console.log("in Form " + this.id + ":_setValueFromElem returning value for elem.name=[" +
+								elem.name + "] with value=[" + val[elem.name] + "]");
+						val[elem.name] = elem.value;
+						return;
+					} else { // check to see if there is a . in the elem.name
+						var parts = elem.name.split(".");
+						var lastPart = parts.pop();
+						var updatePart = this._getObjectToUpdate(val, parts);
+						if (updatePart[lastPart]) {
+							updatePart[lastPart] = elem.value;
+						} else {
+							console.warn("in Form " + this.id + ":_setValueFromElem did not find value for elem.name=[" +
+									elem.name + "] val =", val);
+						}
+					}
+				},
+				_getFormValue: function () {
+					console.log("in Form " + this.id + ":_getFormValue");
+					formElems = this.querySelectorAll('[name]'); // query the form value fields
+					for (var i = 0; i < formElems.length; i++) {
+						var elem = formElems[i];
+						if(elem.checkValidity){
+							if(!elem.checkValidity()){
+								console.warn("Warning invalid form value! Can not save");
+								elem.focus();
+								return this.value;
+							}
+						} else if(elem.valueNode && elem.valueNode.checkValidity) {
+							if(!elem.valueNode.checkValidity()){
+								console.warn("Warning invalid form value! Can not save");
+								elem.focus();
+								return this.value;
+							}
+						}
+					}
+					for (var i = 0; i < formElems.length; i++) {
+						var elem = formElems[i];
+						if (elem.name) {
+							this._setValueFromElem(this.value, elem);
+							console.log("in Form " + this.id + ":_getFormValue setting value for elem.name=[" +
+									elem.name + "] with value=[" + elem.value + "]");
+						}
+					}
+					return this.value;
+				},
+
+				_setFormValue: function () {
+					console.log("in Form " + this.id + ":_setFormValue");
+					if (this.value) {
+						formElems = this.querySelectorAll('[name]'); // query the form value fields
+						console.log("in Form " + this.id + ":_setFormValue formElems.length="+formElems.length);
+						for (var i = 0; i < formElems.length; i++) {
+							var elem = formElems[i];
+							console.log("in Form " + this.id + ":_setFormValue got elem=",elem);
+							console.log("in Form " + this.id + ":_setFormValue got elem.name="+elem.name);
+							if (elem.name) {
+								console.log("in Form " + this.id + ":_setFormValue got elem.name="+elem.name);
+								var val = this._getValueForElem(elem.name);
+								console.log("in Form " + this.id + ":_setFormValue got val="+val);
+								if (val) {
+									elem.value = val;
+									console.log("in Form " + this.id + ":_setFormValue setting elem.value elem.name=[" +
+											elem.name + "] with value=[" + elem.value + "]");
+								}
+							}
+						}
+					}
+				},
+
+				// Called when the form value is set
+				_setValueAttr: function (val) {
+					this._set("value", val);
+					console.log("in Form " + this.id + ":_setValueAttr with val=", val);
+					this._setFormValue(); // set the values into the form fields from this.value
+				},
+				reset: function () { // reset values from this.value, since not live bound can reset from value
+					console.log("in Form " + this.id + ":reset, reset data to =", this.value);
+					this._setFormValue(); // reset the values in the form fields to this.value
+				},
+
+				save: function () { // save the form field values back into this.value
+					var t = this._getFormValue(); // updates this.value from the form fields
+				},
+
+				baseClass: "custom-form"
+			});
+
+			register.parse();
+		}
+
+		//console.log("calling statup");
+		//startup();
+		document.body ? startup() : window.addEventListener("DOMContentLoaded", startup);
+	});
+</script>
+</head>
+<body>
+	<br><br><span> Form3 - Nested data initially set from nested1</span>
+	<div>
+		<custom-form id="form3" name="form3" value="nested1">
+			<div><span class="cell">Type:</span> <d-textbox id="typeid" required format="upperCaseFormat" parse="lowerCaseFormat" name="Type"></d-textbox>
+				<input type="button" value="Format uppercase on" onclick="typeid.format = upperCaseFormat;">
+				<input type="button" value="Format lowercase on" onclick="typeid.format = lowerCaseFormat;">
+				<input type="button" value="Toggle disabled on" onclick="toggleButton(typeid, 'disabled', this);">
+				<input type="button" value="Toggle required off" onclick="toggleButton(typeid, 'required', this);">
+			</div>
+			<div><span class="cell">Type2:</span> <d-textbox id="typeid2" uppercase required name="Type"></d-textbox>
+				<input type="button" value="Toggle trim" onclick="typeid2.trim = !typeid2.trim;">
+				<input type="button" value="Toggle uppercase off" onclick="toggleButton(typeid2, 'uppercase', this);">
+				<input type="button" value="Toggle lowercase on" onclick="toggleButton(typeid2, 'lowercase', this);">
+				<input type="button" value="Toggle propercase on" onclick="toggleButton(typeid2, 'propercase', this);">
+				<input type="button" value="Toggle disabled on" onclick="toggleButton(typeid2, 'disabled', this);">
+				<input type="button" value="Toggle required off" onclick="toggleButton(typeid2, 'required', this);">
+			</div>
+			<div><span class="cell">Password:</span> <d-textbox type="password" maxlength=8 required name="Password"></d-textbox>
+				<span>Max length 8</span>
+			</div>
+			<div><span class="cell">Email:</span> <d-textbox type="email" required name="Email"></d-textbox></div>
+			<div><span class="cell">Street:</span> <d-textbox required maxlength=8 id="streetid" name="Address.Street"></d-textbox>
+				<span>Max length 8.</span>
+				<input type="button" value="Toggle required off" onclick="toggleButton(streetid, 'required', this);">
+				<input type="button" value="Validate field" onclick="console.log(streetid.valueNode.checkValidity());">
+				<span> - Note validate does not fail unless the field is changed, and only shows error if focus or required.</span>
+			</div>
+			<div><span class="cell">City:</span> <d-textbox required name="Address.City"></d-textbox></div>
+			<div><span class="cell">State:</span> <d-textbox required name="Address.State"></d-textbox></div>
+			<div><span class="cell">Zipcode:</span> <d-textbox required name="Address.Zip"></d-textbox></div>
+			<div><span class="cell">Area code:</span> <d-textbox required name="Telephone.AreaCode"></d-textbox></div>
+			<div><span class="cell">Landline Number:</span> <d-textbox type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required name="Telephone.Landline.Number"></d-textbox>
+				<span>type=tel, phone pattern is \d{3}[\-]\d{3}[\-]\d{4}</span>
+			</div>
+			<div><span class="cell">Extension:</span> <d-textbox required name="Telephone.Landline.Extension"></d-textbox></div>
+			<div><span class="cell">Cell Number:</span> <d-textbox required name="Telephone.Cell.Number"></d-textbox></div>
+		</custom-form>
+
+		<input type="button" value="Set value to Nested1" onclick="form3.value = nested1;">
+		<input type="button" value="Set value to Nested2" onclick="form3.value = nested2;">
+		<input type="button" value="Reset" onclick="form3.reset();">
+		<input type="button" value="Save" onclick="form3.save();">
+
+		<form id="form1" onsubmit="alert('Submitted.');return false;" name="example" method="GET">
+			<div><br><span>Normal input fields to compare with the Textboxes above:</span></div>
+			<div><span class="cell">Test required:</span> <input id="inpreq" type="text" required>
+				<input type="button" value="Toggle required off" onclick="toggleButton(inpreq, 'required', this);">
+			</div>
+			<div><span class="cell">Test maxlength:</span> <input type="text" maxlength=8 value="0123456789101112"><span>Max length 8</span></div>
+			<div><span class="cell">Test minlength:</span> <input type="text" minlength=8>
+				<span>Min length 8</span>
+				<span> - Note minlength does not fail validation on any browsers.</span>
+			</div>
+			<div><span class="cell">Test pattern:</span> <input type="text" pattern="\d{3}[\-]\d{3}[\-]\d{4}" value="504-466-653" x-moz-errormessage="Enter valid US phone number 123-456-7890">
+				<span>phone pattern is \d{3}[\-]\d{3}[\-]\d{4}</span>
+			</div>
+			<div><span class="cell">Test req pattern:</span> <input type="text" required pattern="\d{3}[\-]\d{3}[\-]\d{4}" value="504-466-653" title="Enter valid US phone number, use pattern ###-###-####" x-moz-errormessage="Enter valid US phone number, use pattern ###-###-####">
+				<span>required and phone pattern is \d{3}[\-]\d{3}[\-]\d{4}</span>
+			</div>
+			<input type="submit" value="Submit">
+		</form>
+		<br>
+		<div>
+			<span> - Note Require, Format and Parse happen on the initial value, filter and maxlength only on update.</span>
+			<br>
+			<span> - Note not sure about format and parse, currently both are being called so parse is last so it wins.</span>
+		</div>
+	</div>
+</body>
+</html>

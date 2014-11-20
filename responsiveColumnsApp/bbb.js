@@ -16,6 +16,10 @@ define([], function () {
 		},
 		beforeActivate: function (previousView, viewData) {
 		//	this.app.emit("vs-selection-changed","bbb");
+		//	var rc = this.ownerDocument.getElementById("rc");
+		//	rc.breakpoints = "{'phone': '1301px', 'tablet': '1301px', 'desktop': '99999px'}";
+		//	rc.notifyCurrentValue("breakpoints");
+		//	console.log("bbb activated set phone and tablet to 1301px");
 		}
 	};
 });

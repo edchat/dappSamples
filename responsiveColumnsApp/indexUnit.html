@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<title>dapp Responsize Columns Test App</title>
+
+	<link rel="stylesheet" href="app.css">
+
+	<!-- for requireJS -->
+	<script src="../../requirejs/require.js"></script>
+	<script>
+		require.config({
+			paths: {
+				"dapp": "../../dapp",
+				"dcl": "../../dcl",
+				"dojo": "../../dojo",
+				"dpointer": "../../dpointer",
+				"decor": "../../decor",
+				"delite": "../../delite",
+				"deliteful": "../../deliteful",
+				"requirejs": "../../requirejs",
+				"requirejs-text": "../../requirejs-text",
+				"requirejs-dplugins": "../../requirejs-dplugins",
+				"requirejs-domready": "../../requirejs-domready"
+			},
+			waitSeconds: 15
+		});
+	</script>
+
+	<script>
+		require(["./app.js"]);
+	</script>
+
+	<style>
+		button {
+			width: 10em;
+		}
+/*
+		.vs {
+			width: 50%;
+			height: 300px;
+			border: 2px solid gold;
+		}
+	*/
+	</style>
+
+</head>
+<body style="overflow: hidden; margin: 0px">
+	<d-linear-layout class="page width100 height100"><div class="fill">
+		<d-responsive-columns id="rc" style="position: absolute; width: 100%; height: 100%" breakpoints="{'phone': '500px', 'tablet': '900px', 'desktop': '99999px'}">
+			<div layout="{'phone': 'hidden', 'tablet': '182px', 'desktop': '20%'}"><d-linear-layout style="position: absolute; width: 100%; height: 100%;"><div class="fill red"><d-view-stack id="left" class="red" style="position: absolute; width: 100%; height: 100%;"></d-view-stack></div></d-linear-layout></div>
+			<div layout="{'phone': 'fill', 'tablet': 'fill', 'desktop': 'fill'}"><d-linear-layout style="position: absolute; width: 100%; height: 100%"><d-view-stack id="vs" class="fill"></d-view-stack></d-linear-layout></div>
+			<div class="green" layout="{'phone': 'hidden', 'tablet': 'hidden', 'desktop': '20%'}"><d-view-stack id="right" class="green" style="position: absolute; width: 100%; height: 100%;"></d-view-stack></div>
+		</d-responsive-columns></div></d-linear-layout>
+</body>
+</html>

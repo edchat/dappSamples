@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./css/samples.css">
+<style type="text/css">
+	input:focus:invalid {
+		outline-offset: -2px;
+		outline-style: auto;
+		outline-width: 5px;
+		outline-color: rgb(212, 100, 100);
+	}
+
+	input:required:invalid, input:focus:invalid, textarea:required:invalid, textarea:focus:invalid {
+		box-shadow: 0 0 1.5px 1px rgb(212, 100, 100);
+		border: 2px inset rgb(212, 100, 100);
+		background-repeat: no-repeat;
+		background-image: url("./images/error.png");
+		background-position: right top;
+	}
+</style>
+
+<script src="../../requirejs/require.js"></script>
+<script>
+	require.config({
+		paths: {
+			"dapp": "../../dapp",
+			"dcl": "../../dcl",
+			"dojo": "../../dojo",
+			"dpointer": "../../dpointer",
+			"decor": "../../decor",
+			"delite": "../../delite",
+			"deliteful": "../../deliteful",
+			"dstore": "../../dstore",
+			"liaison": "../../liaison",
+			"requirejs": "../../requirejs",
+			"requirejs-text": "../../requirejs-text",
+			"requirejs-dplugins": "../../requirejs-dplugins",
+			"requirejs-domready": "../../requirejs-domready"
+		},
+		waitSeconds: 15
+	});
+</script>
+<script type="text/javascript">
+	data1 = {
+		Street: "123 Valley Rd",
+		City: "Katonah",
+		State: "NY",
+		Zip: "10536"
+	};
+	data2 = {
+		Street: "17 Skyline Dr",
+		City: "Hawthorne",
+		State: "NY",
+		Zip: "10532"
+	};
+	nested1 = {
+		Type: "Home",
+		Address: {
+			Street: "123 Valley Rd",
+			City: "Katonah",
+			State: "NY",
+			Zip: "10536"
+		},
+		Telephone: {
+			AreaCode: "123",
+			Landline: {
+				Number: "456-7890",
+				Extension: "42"
+			},
+			Cell: {
+				Number: "765-4321"
+			}
+		}
+	};
+	nested2 = {
+		Type: "Office",
+		Address: {
+			Street: "17 Skyline Dr",
+			City: "Hawthorne",
+			State: "NY",
+			Zip: "10532"
+		},
+		Telephone: {
+			AreaCode: "098",
+			Landline: {
+				Number: "765-4321",
+				Extension: "24"
+			},
+			Cell: {
+				Number: "123-4567"
+			}
+		}
+	};
+
+	require([
+		"delite/register",
+		"liaison/wrapper",
+		"liaison/delite/createRenderer",
+		"liaison/delite/widgets/Widget"
+	], function (register, wrapper, createRenderer, Widget) {
+		function startup () {
+			register("liaison-form", [HTMLElement, Widget], wrapper.wrap({
+				value: null,
+				original: null,
+				render: function () {
+					console.log("in Form " + this.id + ":render value", this.value);
+				},
+				preRender: function () {
+					console.log("in Form " + this.id + ":preRender value", this.value);
+				},
+				postRender: function () {
+					console.log("in Form " + this.id + ":postRender value", this.value);
+				},
+				refreshRendering: function (oldValues) {
+					console.log("in Form " + this.id + ":refreshRendering value", this.value);
+				},
+				// Called when the form value is set
+				_setValueAttr: function (val) {
+					this._set("value", val);
+					console.log("in Form " + this.id + ":_setValueAttr with val=", val);
+					//this.original = JSON.parse(JSON.stringify(val)); // deep copy to save original since live binding
+					this.original = wrapper.wrap(wrapper.unwrap(val)); // deep copy to save original since live binding
+					var formTemplate = this.querySelector("template");
+					formTemplate.bind("bind", this.value);
+				},
+				reset: function () { // reset values from the original
+					this.resetValues(this.value, this.original);
+					console.log("in Form " + this.id + ":reset, reset data to =", this.value);
+				},
+				// Need to reset the tree of values without actually binding to the clone of the original
+				resetValues: function(v, data) {
+					console.log("in Form " + this.id + ":resetValues called with data =",data);
+					if(data instanceof Object){
+						for(var s in data){
+							if(data.hasOwnProperty(s)){
+								if(data[s] instanceof Object){
+									this.resetValues(v[s], data[s]);
+								} else {
+									v[s] = data[s];
+								}
+							}
+						}
+					}else{
+						v = data;
+					}
+				},
+				save: function () { // reset values
+					this.original = JSON.parse(JSON.stringify(this.value)); // deep copy
+					console.log("in Form " + this.id + ":save, saved data =", this.original);
+				},
+				baseClass: "liaison-form"
+			}));
+			register.parse();
+		}
+
+		document.body ? startup() : window.addEventListener("DOMContentLoaded", startup);
+	});
+</script>
+</head>
+<body>
+	<br><span> Form1 and Form2 can be set from the same data object, with liaison we do have live data binding.</span>
+	<br><span> So when showing same data on Form1 and 2 updates are seen immediately.</span>
+	<br><span> But there is an issue when if each form has its own Save, when saving from Form1, Form2 does
+		not know the other form was saved, so reset on the Form2 will not reset to the recent save,
+		it will reset to the last save it knows about.
+		So I have save and reset update both forms for the with bound forms.</span>
+	<br><br><span> Form1 intially set from data1</span>
+	<liaison-form id="form1" name="form1" value="data1">
+		<template>
+			<div><span class="cell">Street:</span> <input type="text" required  name="Street" value="{{Street}}"></div>
+			<div><span class="cell">City:</span> <input type="text" required name="City" value="{{City}}"></div>
+			<div><span class="cell">State:</span> <input type="text" required name="State" value="{{State}}"></div>
+			<div><span class="cell">Zipcode:</span> <input type="text" required name="Zip" value="{{Zip}}"></div>
+		</template>
+	</liaison-form>
+	<input type="button" value="Bind Data1" onclick="form1.value = data1;">
+	<input type="button" value="Bind Data2" onclick="form1.value = data2;">
+	<input type="button" value="Reset Both" onclick="form1.reset();form2.reset();">
+	<input type="button" value="Save Both" onclick="form1.save();form2.save();">
+	<br><br><span> Form2 initially set form data2 </span>
+	<liaison-form id="form2" name="form2" value="data2">
+		<template>
+			<div><span class="cell">Street:</span> <input type="text" required value="{{Street}}"></div>
+			<div><span class="cell">City:</span> <input type="text" required value="{{City}}"></div>
+			<div><span class="cell">State:</span> <input type="text" required value="{{State}}"></div>
+			<div><span class="cell">Zipcode:</span> <input type="text" required value="{{Zip}}"></div>
+		</template>
+	</liaison-form>
+	<input type="button" value="Bind Data1" onclick="form2.value = data1;">
+	<input type="button" value="Bind Data2" onclick="form2.value = data2;">
+	<input type="button" value="Reset Both" onclick="form1.reset();form2.reset();">
+	<input type="button" value="Save Both" onclick="form1.save();form2.save();">
+
+	<br><br><span> Form3 - Nested data initially set from nested1</span>
+	<div>
+		<liaison-form id="form3" name="form3" value="nested1">
+			<template bind="{{current}}">
+				<div><span class="cell">Type:</span> <input type="text" value="{{Type}}"></div>
+				<template bind="{{Address}}">
+					<div><span class="cell">Street:</span> <input type="text" value="{{Street}}"></div>
+					<div><span class="cell">City:</span> <input type="text" value="{{City}}"></div>
+					<div><span class="cell">State:</span> <input type="text" value="{{State}}"></div>
+					<div><span class="cell">Zipcode:</span> <input type="text" value="{{Zip}}"></div>
+				</template>
+				<template bind="{{Telephone}}">
+					<div><span class="cell">Area code:</span> <input type="text" value="{{AreaCode}}"></div>
+					<div><span class="cell">Landline Number:</span> <input type="text" value="{{Landline.Number}}"></div>
+					<div><span class="cell">Extension:</span> <input type="text" value="{{Landline.Extension}}"></div>
+					<div><span class="cell">Cell Number:</span> <input type="text" value="{{Cell.Number}}"></div>
+				</template>
+			</template>
+		</liaison-form>
+
+		<input type="button" value="Bind Nested1" onclick="form3.value = nested1;">
+		<input type="button" value="Bind Nested2" onclick="form3.value = nested2;">
+		<input type="button" value="Reset" onclick="form3.reset();">
+		<input type="button" value="Save" onclick="form3.save();">
+	</div>
+</body>
+</html>
