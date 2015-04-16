@@ -32,7 +32,8 @@
 		"logAll": 1
 	},
 
-	"defaultView": "header+content,home",
+	//"defaultView": "header+content,home",
+	"defaultView": "header",
 
 	"views": {
 		"main": {

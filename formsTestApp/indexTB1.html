@@ -31,6 +31,8 @@
 			"delite": "../../delite",
 			"deliteful": "../../deliteful",
 			"dstore": "../../dstore",
+			"jquery": "../../jquery",
+			"lie": "../../lie",
 			"liaison": "../../liaison",
 			"requirejs": "../../requirejs",
 			"requirejs-text": "../../requirejs-text",
@@ -161,6 +163,7 @@
 	};
 
 	var changeButtonNumberAttr = function(node, attr, button) {
+		console.log("changeButtonNumberAttr called currently node[attr]="+node[attr]);
 		if(node[attr] === 8){
 			node[attr] = 16;
 		} else if(node[attr] === 16){
@@ -170,8 +173,9 @@
 		} else {
 			node[attr] = 8;
 		}
+		console.log("changeButtonNumberAttr called updated node[attr]="+node[attr]);
 
-		button.value = "Change "+ attr + " from " + node[attr];
+		button.value = "Changed "+ attr + " to " + node[attr];
 	};
 
 	var handleSubmit = function(node, formid) {
@@ -357,9 +361,9 @@
 	<div>
 		<form id="formFilter1" onsubmit="handleSubmit(basicid1, 'formFilter1');return false;" name="basicexample1" method="GET">
 			<div><span class="cell">Test Basic:</span>
-				<d-textbox id="basicid1" tip="test tip" selectInputText=true> <!-- name="basicid1" -->
-					<!-- the only way the input value save works is if the name is on the input and not on the textbox -->
-					<input id="basicid1-input" name="basicid1-input" value=""/>
+				<d-textbox id="basicid1" maxLength="8" tip="test tip" selectInputText=true name="basicid1"> <!-- name="basicid1" -->
+					<!-- the only way the input value save works is if the name is on the input and not on the textbox
+					<input id="basicid1-input" name="basicid1-input" value=""/> -->
 				</d-textbox>
 				<input id="basicid1b" tip="test tip" required name="basic1b" value="initialData">
 				<br>
@@ -369,16 +373,16 @@
 				<input type="button" value="Set name basicxx" onclick="setPattern('basicid1', 'name', 'basicxx');">
 				<input type="button" value="Set name blank" onclick="setPattern('basicid1', 'name', '');">
 				<br>
-				<input type="button" value="Change maxlength" onclick="changeButtonNumberAttr(basicid1, 'maxlength', this); changeButtonNumberAttr(basicid1b, 'maxlength', this);">
-				<span>maxlength only shows invalid with focus, required or on submit(if you attempt to update the value).</span>
+				<input type="button" value="Change maxLength" onclick="changeButtonNumberAttr(basicid1, 'maxLength', this); changeButtonNumberAttr(basicid1b, 'maxLength', this);">
+				<span>maxLength only shows invalid with focus, required or on submit(if you attempt to update the value).</span>
 			</div>
 			<input type="submit" value="Submit">
 		</form>
 <br><br>
 
 		<form id="formFilter1B" onsubmit="handleSubmit(typeid2, 'formFilter1B');return false;" name="fitlerexample" method="GET">
-			<div><span class="cell">Test Filters:</span>
-				<d-textbox id="typeid2" trim required value="Test   " name="Type"></d-textbox>
+			<div><span class="cell">Test Filters: </span>
+				<d-textbox id="typeid2" trim=true required value="Test   " name="Type"></d-textbox>
 				<span>Current: </span><span id="filterCurrent">filter=No Filter</span><span>  </span>
 				<br>
 				<input type="button" value="Set value" onclick="setValueButton(typeid2, 'value', this);">
@@ -391,7 +395,7 @@
 				<input type="button" value="Toggle selectInputText on" onclick="toggleButton(typeid2, 'selectInputText', this);">
 				<input type="button" value="Toggle disabled on" onclick="toggleButton(typeid2, 'disabled', this);">
 				<input type="button" value="Toggle required off" onclick="toggleButton(typeid2, 'required', this);">
-				<br><span> - Note: Filter changes only take effect when the value is changed.</span>
+				<br><span> - Note: Filter changes only take effect when the value is changed. (ie: until you leave the field or else you can not type a blank with trim.)</span>
 			</div>
 			<input type="submit" value="Submit">
 		</form>
@@ -443,11 +447,11 @@
 				<input type="button" value="Toggle disabled on" onclick="toggleButton(typeid2, 'disabled', this);">
 				<input type="button" value="Toggle required off" onclick="toggleButton(typeid2, 'required', this);">
 			</div>
-			<div><span class="cell">Password:</span> <d-textbox type="password" maxlength=8 required name="Password"></d-textbox>
+			<div><span class="cell">Password:</span> <d-textbox type="password" maxLength=8 required name="Password"></d-textbox>
 				<span>Max length 8</span>
 			</div>
 			<div><span class="cell">Email:</span> <d-textbox type="email" required name="Email"></d-textbox></div>
-			<div><span class="cell">Street:</span> <d-textbox required maxlength=8 id="streetid" name="Address.Street"></d-textbox>
+			<div><span class="cell">Street:</span> <d-textbox required maxLength=8 id="streetid" name="Address.Street"></d-textbox>
 				<span>Max length 8.</span>
 				<input type="button" value="Toggle required off" onclick="toggleButton(streetid, 'required', this);">
 				<input type="button" value="Validate field" onclick="console.log(streetid.valueNode.checkValidity());">
@@ -479,10 +483,10 @@
 			<div><span class="cell">Test required:</span> <input id="inpreq" name="inpreq" type="text" required>
 				<input type="button" value="Toggle required off" onclick="toggleButton(inpreq, 'required', this);">
 			</div>
-			<div><span class="cell">Test maxlength:</span> <input type="text" name="maxlen" maxlength=8 value="0123456789101112"><span>Max length 8</span></div>
-			<div><span class="cell">Test minlength:</span> <input type="text" name="minlen" minlength=8>
+			<div><span class="cell">Test maxLength:</span> <input type="text" name="maxlen" maxLength=8 value="0123456789101112"><span>Max length 8</span></div>
+			<div><span class="cell">Test minLength:</span> <input type="text" name="minlen" minLength=8>
 				<span>Min length 8</span>
-				<span> - Note minlength does not fail validation on any browsers.</span>
+				<span> - Note minLength needs to be spelled minLength.</span>
 			</div>
 			<div><span class="cell">Test pattern:</span> <input type="text" name="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" value="504-466-653" x-moz-errormessage="Enter valid US phone number 123-456-7890">
 				<span>phone pattern is \d{3}[\-]\d{3}[\-]\d{4}</span>
@@ -494,7 +498,7 @@
 		</form>
 		<br>
 		<div>
-			<span> - Note Require, Format and Parse happen on the initial value, filter and maxlength only on update.</span>
+			<span> - Note Require, Format and Parse happen on the initial value, filter and maxLength only on update.</span>
 			<br>
 			<span> - Note not sure about format and parse, currently both are being called so parse is last so it wins.</span>
 		</div>
